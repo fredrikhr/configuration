@@ -13,7 +13,7 @@ All files in this folder starting with `Home` are meant to be used as a replacem
 | OS | File to use as Home Directory `.gitconfig` |
 | - | - |
 | Windows | [`Home.windows.gitconfig`](Home.windows.gitconfig) |
-| UNIX | [`Home.unix.gitconfig`](Home.windows.gitconfig) |
+| UNIX | [`Home.unix.gitconfig`](Home.unix.gitconfig) |
 
 *On my work environments at [UiT The arctic university of Norway](https://uit.no/) I use the corresponding `UiT` gitconfig-files.*
 
