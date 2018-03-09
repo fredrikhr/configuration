@@ -1,0 +1,18 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.wordWrap": "off",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "files.associations": {
+        "*.mak": "makefile",
+        "*.resx": "xml",
+        "*.*proj": "xml"
+    },
+    "terminal.integrated.shell.windows": "cmd.exe",
+    "python.pythonPath": "py",
+    "python.formatting.provider": "autopep8",
+    "editor.renderWhitespace": "all",
+    "omnisharp.projectLoadTimeout": 3600
+}

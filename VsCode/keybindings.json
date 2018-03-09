@@ -1,0 +1,38 @@
+// Place your key bindings in this file to overwrite the defaults
+[{
+    "key": "ctrl+e c",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus && !editorReadonly"
+},{
+    "key": "ctrl+e d",
+    "command": "editor.action.formatDocument",
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly"
+},{
+    "key": "ctrl+e u",
+    "command": "editor.action.removeCommentLine",
+    "when": "editorTextFocus && !editorReadonly"
+},{
+    "key": "ctrl+shift+s",
+    "command": "workbench.action.files.saveAll"
+},
+{
+    "key": "f6",
+    "command": "workbench.action.tasks.build"
+},
+{
+    "key": "ctrl+shift+b",
+    "command": "-workbench.action.tasks.build"
+},
+{
+    "key": "ctrl+pausebreak",
+    "command": "workbench.action.tasks.terminate"
+},
+{
+    "key": "ctrl+r a",
+    "command": "workbench.action.tasks.test"
+},
+{
+    "key": "ctrl+alt+backspace",
+    "command": "workbench.action.tasks.runTask"
+}
+]
