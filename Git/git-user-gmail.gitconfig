@@ -1,0 +1,4 @@
+[user]
+    email = fredrik.rasch@gmail.com
+[include]
+    path = ./git-user-name.gitconfig

@@ -1,0 +1,4 @@
+[difftool]
+	prompt = true
+[mergetool]
+	prompt = true
