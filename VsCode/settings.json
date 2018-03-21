@@ -14,6 +14,7 @@
     "python.pythonPath": "py",
     "python.formatting.provider": "autopep8",
     "python.linting.lintOnSave": true,
+    "python.linting.pylintUseMinimalCheckers": false,
     "editor.renderWhitespace": "all",
     "omnisharp.projectLoadTimeout": 3600
 }
