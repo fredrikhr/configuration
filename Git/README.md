@@ -2,8 +2,6 @@
 
 Configuration for Git Version Control.
 
-Nothing too fancy in here, I use a very standard configuration for my Git.
-
 ## Git-config include path
 
 The user-specific `.gitconfig` file normally sits in the user's home directory (i.e. `~/.gitconfig` or `%USERPROFILE%\.gitconfig`). In order to keep my Git configuration in the local clone of this repository, I use the `include.path` configuration to point my Home-directory `.gitconfig` file to the actual file in this repository.
