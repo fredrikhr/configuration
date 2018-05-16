@@ -16,5 +16,7 @@
     "python.linting.lintOnSave": true,
     "python.linting.pylintUseMinimalCheckers": false,
     "editor.renderWhitespace": "all",
-    "omnisharp.projectLoadTimeout": 3600
+    "omnisharp.projectLoadTimeout": 3600,
+    "explorer.openEditors.visible": 0,
+    "extensions.showRecommendationsOnlyOnDemand": true
 }
