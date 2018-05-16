@@ -18,5 +18,10 @@
     "editor.renderWhitespace": "all",
     "omnisharp.projectLoadTimeout": 3600,
     "explorer.openEditors.visible": 0,
-    "extensions.showRecommendationsOnlyOnDemand": true
+    "extensions.showRecommendationsOnlyOnDemand": true,
+    "[markdown]": {
+        "editor.wordWrap": "bounded",
+        "editor.wordWrapColumn": 80,
+        "editor.quickSuggestions": false
+    }
 }
