@@ -1,7 +1,0 @@
-[include]
-	path = ./git-user-raschnet.gitconfig
-	path = ./git-lg.gitconfig
-	path = ./git-push.gitconfig
-	path = ./git-diff-merge.gitconfig
-[credential]
-	helper = cache

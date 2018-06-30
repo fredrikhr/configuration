@@ -2,18 +2,35 @@
 
 Configuration for Git Version Control.
 
+## Setup commands
+
+| OS | Command-line |
+| - | - |
+| Windows | `COPY "%APPDATA%\Configuration Repository\Git\Home.windows.gitconfig" "%USERPROFILE%\.gitconfig"` |
+| UNIX | `ln -sfv ~/.config/repository/Git/Home.unix.gitconfig ~/.gitconfig`
+
+### User configuration commands
+
+| OS | Command-line |
+| - | - |
+| Windows | `COPY "%APPDATA%\Configuration Repository\Git\git-user.sample.gitconfig" "%APPDATA%\Configuration Repository\Git\git-user.gitconfig"` |
+| UNIX | `cp -v ~/.config/repository/Git/git-user.sample.gitconfig ~/.config/repository/Git/git-user.gitconfig`
+
+Then open one of the following files in your text editor of choice:
+
+| OS | Command-line |
+| - | - |
+| Windows | `"%APPDATA%\Configuration Repository\Git\git-user.gitconfig"` |
+| UNIX | `~/.config/repository/Git/git-user.gitconfig`
+
 ## Git-config include path
 
 The user-specific `.gitconfig` file normally sits in the user's home directory (i.e. `~/.gitconfig` or `%USERPROFILE%\.gitconfig`). In order to keep my Git configuration in the local clone of this repository, I use the `include.path` configuration to point my Home-directory `.gitconfig` file to the actual file in this repository.
-
-All files in this folder starting with `Home` are meant to be used as a replacement for the `.gitconfig` in the Home Directory
 
 | OS | File to use as Home Directory `.gitconfig` |
 | - | - |
 | Windows | [`Home.windows.gitconfig`](Home.windows.gitconfig) |
 | UNIX | [`Home.unix.gitconfig`](Home.unix.gitconfig) |
-
-*On my work environments at [UiT The arctic university of Norway](https://uit.no/) I use the corresponding `UiT` gitconfig-files.*
 
 ## Git push default configuration
 

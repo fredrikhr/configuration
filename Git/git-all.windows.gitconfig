@@ -1,0 +1,4 @@
+[include]
+	path = ./git-all.common.gitconfig
+[core]
+	editor = \"C:\\PROGRA~1\\Vim\\vim.bat\"

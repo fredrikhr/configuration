@@ -1,9 +1,0 @@
-[diff]
-	tool = vsdiffmerge
-[merge]
-	tool = vsdiffmerge
-[include]
-	path = ./git-user-uit.gitconfig
-	path = ./git-lg.gitconfig
-	path = ./git-push.gitconfig
-	path = ./git-diff-merge.gitconfig
