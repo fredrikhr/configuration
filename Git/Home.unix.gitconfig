@@ -1,2 +1,2 @@
 [include]
-	path = ~/.config/repository/Git/git-all.unix.gitconfig
+	path = ~/.config/repository/Git/git-all.common.gitconfig
