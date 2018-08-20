@@ -8,7 +8,8 @@
     "files.associations": {
         "*.mak": "makefile",
         "*.resx": "xml",
-        "*.*proj": "xml"
+        "*.*proj": "msbuild",
+        "*.props": "msbuild"
     },
     "terminal.integrated.shell.windows": "cmd.exe",
     "python.pythonPath": "py",
@@ -24,5 +25,27 @@
         "editor.wordWrapColumn": 80,
         "editor.quickSuggestions": false
     },
-    "workbench.iconTheme": "vscode-icons"
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "msbuildProjectTools": {
+        "logging": {
+            "level": "Information",
+            "seq": {},
+            "file": "",
+            "trace": false
+        },
+        "language": {
+            "disableFeature": {},
+            "useClassicProvider": false,
+            "disable": {
+                "hover": false
+            }
+        },
+        "nuget": {
+            "newestVersionsFirst": true,
+            "includePreRelease": true,
+            "disablePrefetch": false
+        },
+        "schemaVersion": 1
+    }
 }
