@@ -28,8 +28,8 @@ MKLINK /J "%APPDATA%\Code\User" "%APPDATA%\Configuration Repository\VsCode"
 
 ``` sh
 rm -rfv ~/.config/Code/User
-ln -sv ~/.config/repository/VsCode ~/.config/Code/
-mv -v ~/.config/Code/VsCode ~/.config/Code/User
+mkdir -p ~/.config/Code
+ln -sv ~/.config/repository/VsCode ~/.config/Code/User
 ```
 
 ### Future
