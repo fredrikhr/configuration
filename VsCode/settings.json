@@ -12,7 +12,6 @@
         "*.props": "msbuild"
     },
     "terminal.integrated.shell.windows": "cmd.exe",
-    "python.pythonPath": "py",
     "python.formatting.provider": "autopep8",
     "python.linting.lintOnSave": true,
     "python.linting.pylintUseMinimalCheckers": false,
