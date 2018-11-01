@@ -2,6 +2,14 @@
 
 I do a lot of .NET development. I also like my repository automatically set up for a multi-project directory structure.
 
+In your repository root, you can run the following command to fetch (or update) the solution support files.
+
+``` sh
+curl -o AllRules.ruleset -LRJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/AllRules.ruleset" -o Directory.Build.props -LRJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Build.props"
+```
+
+My default solution directory structure:
+
 ``` txt
 root
 ├─ bin

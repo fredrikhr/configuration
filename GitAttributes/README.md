@@ -1,5 +1,11 @@
 # `.gitattributes` files
 
+Download command:
+
+``` sh
+curl -o .gitattributes -LRJ "https://github.com/couven92/configuration/raw/master/GitAttributes/.gitattributes"
+```
+
 The `.gitattributes` file is a dotfile that instructs Git on how to handle file checkouts, commits and changes for files in your repository.
 
 The file was originally created by Visual Studio 2017, and I have subsequently added by own attributes at the end.
