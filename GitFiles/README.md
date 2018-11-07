@@ -4,8 +4,8 @@ Contains git repository root dotfiles.
 
 There are two of them
 
-* [`.gitignore`](#.gitignore-file)
-* [`.gitatrributes`](#.gitattributes-file)
+* [`.gitignore`](#gitignore-file)
+* [`.gitatrributes`](#gitattributes-file)
 
 ## `.gitattributes` file
 
