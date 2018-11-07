@@ -28,5 +28,5 @@ Therefore I enforce LF line-endings by Git for the affected files. On Linux, the
 Download command:
 
 ``` sh
-curl -o .gitattributes -LRJ "https://github.com/couven92/configuration/raw/master/GitFiles/.gitignore"
+curl -o .gitignore -LRJ "https://github.com/couven92/configuration/raw/master/GitFiles/.gitignore"
 ```
