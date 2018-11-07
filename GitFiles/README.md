@@ -1,9 +1,18 @@
-# `.gitattributes` files
+# Git files
+
+Contains git repository root dotfiles.
+
+There are two of them
+
+* [`.gitignore`](#.gitignore-file)
+* [`.gitatrributes`](#.gitattributes-file)
+
+## `.gitattributes` file
 
 Download command:
 
 ``` sh
-curl -o .gitattributes -LRJ "https://github.com/couven92/configuration/raw/master/GitAttributes/.gitattributes"
+curl -o .gitattributes -LRJ "https://github.com/couven92/configuration/raw/master/GitFiles/.gitattributes"
 ```
 
 The `.gitattributes` file is a dotfile that instructs Git on how to handle file checkouts, commits and changes for files in your repository.
