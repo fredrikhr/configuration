@@ -22,3 +22,11 @@ The file was originally created by Visual Studio 2017, and I have subsequently a
 Node.js, NPM and Yarn all *really* want to use UNIX-like line endings (LF) even when on Windows. This causes false positives on changes to these files.
 
 Therefore I enforce LF line-endings by Git for the affected files. On Linux, these settings have no effect.
+
+## `.gitignore` file
+
+Download command:
+
+``` sh
+curl -o .gitattributes -LRJ "https://github.com/couven92/configuration/raw/master/GitFiles/.gitignore"
+```
