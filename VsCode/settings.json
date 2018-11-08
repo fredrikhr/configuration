@@ -9,7 +9,8 @@
         "*.mak": "makefile",
         "*.resx": "xml",
         "*.*proj": "msbuild",
-        "*.props": "msbuild"
+        "*.props": "msbuild",
+        "*.ruleset": "xml"
     },
     "terminal.integrated.shell.windows": "cmd.exe",
     "python.formatting.provider": "autopep8",
