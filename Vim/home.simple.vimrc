@@ -1,2 +1,2 @@
-source ~/.vim/config/simple.unix.vimrc
+source ~/.vim/config/.vimrc
 
