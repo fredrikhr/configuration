@@ -41,3 +41,41 @@ ref.: [Add support for additional global config files (in addition to settings.j
 ## Additional folders in Configuration Folders
 
 The [VsCode](../VsCode) folder contains a [`.gitignore`](./.gitignore) file containing rules to ignore the `snippets` and `workspaceStorage` folders that Visual Studio Code creates whenever you open a folder. *(Remember we have linked the local clone of this repository to the Configuration folder that is used by VsCode.)*
+
+## VS Code Extensions
+
+`extensions.txt` list all extensions used for VS Code.
+
+### Export Command
+
+Use the following commands to export the extensions used in VS Code.
+
+#### Windows export
+
+``` bat
+code --list-extensions > "%APPDATA%\Configuration Repository\VsCode\extensions.txt"
+```
+
+#### Linux export
+
+``` sh
+code --list-extensions > ~/.config/repository/VsCode/extensions.txt
+```
+
+### Import Command
+
+Execute the following command to install all listed extensions
+
+#### Windows import
+
+``` txt
+FOR /F %E IN ("%APPDATA%\Configuration Repository\VsCode\extensions.txt") DO @code --install-extension "%~E"
+```
+
+#### Linux import
+
+``` sh
+while read e; do
+  code --install-extension "$e"
+done < ~/.config/repository/VsCode/extensions.txt
+```
