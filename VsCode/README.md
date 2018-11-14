@@ -69,7 +69,9 @@ Execute the following command to install all listed extensions
 #### Windows import
 
 ``` txt
-FOR /F %E IN ("%APPDATA%\Configuration Repository\VsCode\extensions.txt") DO @code --install-extension "%~E"
+PUSHD "%APPDATA%\Configuration Repository\VsCode"
+FOR /F %E IN (extensions.txt) DO @code --install-extension "%~E"
+POPD
 ```
 
 #### Linux import
