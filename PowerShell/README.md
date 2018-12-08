@@ -13,7 +13,7 @@ MKLINK /J "%USERPROFILE%\Documents\WindowsPowerShell" "%APPDATA%\Configuration R
 ## Linux
 
 ``` sh
-mkdir -p "~/Documents"
+mkdir -p ~/Documents
 ln -sv ~/.config/repository/PowerShell ~/Documents/PowerShell
 ```
 
