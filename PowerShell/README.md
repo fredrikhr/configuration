@@ -6,7 +6,7 @@ PowerShell console.
 ## Windows
 
 ``` bat
-IF EXIST "%USERPROFILE%\Documents\WindowsPowerShell" RENAME "WindowsPowerShell.bak"
+IF EXIST "%USERPROFILE%\Documents\WindowsPowerShell" RENAME "%USERPROFILE%\Documents\WindowsPowerShell" "WindowsPowerShell.bak"
 MKLINK /J "%USERPROFILE%\Documents\WindowsPowerShell" "%APPDATA%\Configuration Repository\PowerShell"
 ```
 
