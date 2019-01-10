@@ -5,7 +5,7 @@
 ``` bat
 MD "%USERPROFILE%\.vim"
 MKLINK /J "%USERPROFILE%\.vim\config" "%APPDATA%\Configuration Repository\Vim"
-git clone https://github.com/VundleVim/Vundle.vim.git -- "%USERPROFILE%\.vim\bundle\Vundle.vim"
+git clone --config "core.autocrlf=false" https://github.com/VundleVim/Vundle.vim.git -- "%USERPROFILE%\.vim\bundle\Vundle.vim"
 COPY "%USERPROFILE%\.vim\config\home.vimrc" "%USERPROFILE%\.vimrc"
 ```
 
