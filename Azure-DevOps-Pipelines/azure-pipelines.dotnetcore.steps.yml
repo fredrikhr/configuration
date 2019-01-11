@@ -8,6 +8,8 @@ parameters:
   restoreArguments: ''
   buildArguments: ''
   testArguments: ''
+  doPackTask: false
+  packArguments: ''
   publishArguments: ''
   publishOutputName: dotnet
   publishWebProjects: false
@@ -17,6 +19,7 @@ parameters:
   restoreDisplayName: Restore
   buildDisplayName: Build
   testDisplayName: Test
+  packDisplayName: Pack
   publishDisplayName: Publish
   uploadArtifactsDisplayName: Upload Published Artifacts
 steps:
@@ -40,6 +43,14 @@ steps:
     projects: ${{ parameters.testProjects }}
     arguments: ${{ parameters.testArguments }}
     publishTestResults: true
+- ${{ if eq('true', parameters.doPackTask) }}:
+  - task: DotNetCoreCLI@2
+    displayName: ${{ parameters.packDisplayName }}
+    inputs:
+      command: custom
+      custom: pack
+      projects: ${{ parameters.publishProjects }}
+      arguments: ${{ parameters.packArguments }} --output $(Build.ArtifactStagingDirectory)/${{ parameters.publishOutputName }}
 - task: DotNetCoreCLI@2
   displayName: ${{ parameters.publishDisplayName }}
   inputs:
@@ -53,5 +64,5 @@ steps:
   displayName: ${{ parameters.uploadArtifactsDisplayName }}
   inputs:
     PathtoPublish: $(Build.ArtifactStagingDirectory)/${{ parameters.publishOutputName }}
-    ArtifactName: ${{ parameters.artifactPrefix }}-${{ parameters.publishOutputName }}-$(Build.BuildNumber)
+    ArtifactName: ${{ parameters.artifactPrefix }}-${{ parameters.publishOutputName }}
   continueOnError: true
