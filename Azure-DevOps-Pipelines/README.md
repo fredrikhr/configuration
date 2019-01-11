@@ -18,8 +18,8 @@ jobs to
 
 .NET Core projects unsing the Azure DevOps built-in .NET Core CLI task.
 
-Execute the following commands to download the files into your repository root:
+Execute the following commands to download the files into your repository root or, even-better, into a `ci` directory:
 
 ``` sh
-curl -o azure-pipelines.yml -LR "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.root.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.jobs.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.steps.yml"
+curl -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.root.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.jobs.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.steps.yml"
 ```
