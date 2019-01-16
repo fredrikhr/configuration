@@ -20,6 +20,20 @@ jobs to
 
 Execute the following commands to download the files into your repository root or, even-better, into a `ci` directory:
 
-``` sh
+### Windows
+
+``` bat
+IF NOT EXIST ci MD ci
+PUSHD ci
 curl -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.root.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.jobs.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.steps.yml"
+POPD
 ```
+
+### Linux
+
+``` sh
+mkdir -p  ci
+cd ci
+curl -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.root.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.jobs.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.steps.yml"
+cd -
+``` 
