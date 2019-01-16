@@ -9,7 +9,10 @@ PowerShell console.
 IF EXIST "%USERPROFILE%\Documents\WindowsPowerShell" RENAME "%USERPROFILE%\Documents\WindowsPowerShell" "WindowsPowerShell.bak"
 MKLINK /J "%USERPROFILE%\Documents\WindowsPowerShell" "%APPDATA%\Configuration Repository\PowerShell"
 IF EXIST "%USERPROFILE%\Documents\WindowsPowerShell.bak" (
-  XCOPY /S "%USERPROFILE%\Documents\WindowsPowerShell.bak" "%USERPROFILE%\Documents\WindowsPowerShell"
+  PUSHD "%USERPROFILE%\Documents\WindowsPowerShell.bak"
+  FOR /D %E IN (*) DO MOVE "%~E" "%USERPROFILE%\Documents\WindowsPowerShell"
+  FOR %E IN (*) DO MOVE "%~E" "%USERPROFILE%\Documents\WindowsPowerShell"
+  POPD
   RD /S /Q "%USERPROFILE%\Documents\WindowsPowerShell.bak"
 )
 ```
