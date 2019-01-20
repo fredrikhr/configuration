@@ -21,7 +21,7 @@ IF EXIST "%USERPROFILE%\Documents\WindowsPowerShell.bak" (
 
 ``` sh
 mkdir -p ~/Documents
-ln -sv ~/.config/repository/PowerShell ~/Documents/PowerShell
+ln -sv ~/.config/repository/PowerShell ~/.config/powershell
 ```
 
 ## Custom Prompt
