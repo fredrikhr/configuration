@@ -25,7 +25,7 @@ Execute the following commands to download the files into your repository root o
 ``` bat
 IF NOT EXIST ci MD ci
 PUSHD ci
-curl -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.build.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.buildJob.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.test.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.testJob.yml"
+curl -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.build.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.buildJob.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.test.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.testJob.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/download-azuredevops-msbuild-logger.ps1" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/download-azuredevops-msbuild-logger.yml"
 POPD
 ```
 
@@ -34,6 +34,6 @@ POPD
 ``` sh
 mkdir -p  ci
 cd ci
-curl -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.build.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.buildJob.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.test.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.testJob.yml"
+curl -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.build.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.buildJob.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.test.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/azure-pipelines.dotnetcore.testJob.yml" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/download-azuredevops-msbuild-logger.ps1" -LORJ "https://github.com/couven92/configuration/raw/master/Azure-DevOps-Pipelines/download-azuredevops-msbuild-logger.yml"
 cd -
 ``` 
