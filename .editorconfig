@@ -1,14 +1,14 @@
 root = true
 
+# Defaults
 [*]
 indent_size = 4
 indent_style = space
-insert_final_newline = true
 trim_trailing_whitespace = true
+insert_final_newline = true
 
-[*.gitconfig]
-indent_style = tab
-
-[*.md]
+[*.{xml,json,js,ts,jsx,tsx,vue,css,styl,*proj,targets,html,props,yml,nim,nimble,nim.cfg}]
 indent_size = 2
+
+[*.{md,markdown}]
 trim_trailing_whitespace = false
