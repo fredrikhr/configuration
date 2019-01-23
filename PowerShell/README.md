@@ -20,7 +20,6 @@ IF EXIST "%USERPROFILE%\Documents\WindowsPowerShell.bak" (
 ## Linux
 
 ``` sh
-mkdir -p ~/Documents
 ln -sv ~/.config/repository/PowerShell ~/.config/powershell
 ```
 
