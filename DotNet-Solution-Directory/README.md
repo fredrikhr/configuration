@@ -5,21 +5,22 @@ I do a lot of .NET development. I also like my repository automatically set up f
 In your repository root, you can run the following command to fetch (or update) the solution support files.
 
 ``` sh
-curl -o AllRules.ruleset -LRJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/AllRules.ruleset" -o Directory.Build.props -LRJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Build.props"
+curl -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/AllRules.ruleset" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Build.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Meta.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Version.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Build.targets"
 ```
 
 My default solution directory structure:
 
 ``` txt
 root
-├─ bin
+├─ .azure-pipelines
+├─ bin (compiler binary output directory)
 |  ├─ Debug
 |  |  ├─ netstandard1.3
 |  |  └─ netstandard2.0
 |  └─ Release
 |     ├─ netstandard1.3
 |     └─ netstandard2.0
-├─ obj
+├─ obj (Compiler intermediate directory)
 |  └─ ...
 ├─ src
 |  └─ ...
@@ -29,11 +30,14 @@ root
 |  └─ ...*.Test
 ├─ .gitignore
 ├─ .gitattributes
-├─ .editorconfig
+├─ .editorconfig (synced from here)
 ├─ LICENSE
 ├─ README.md
-├─ AllRules.ruleset
-├─ Directory.Build.props
+├─ AllRules.ruleset (synced from here)
+├─ Directory.Build.props (synced from here)
+├─ Directory.Build.targets (synced from here)
+├─ Directory.Meta.props (individual extension for Directory.Build.props)
+├─ Directory.Version.props (individual extension for Directory.Build.targets)
 └─ *.sln
 ```
 
