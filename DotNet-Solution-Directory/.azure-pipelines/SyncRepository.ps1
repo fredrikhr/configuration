@@ -39,6 +39,9 @@ $BuildRequestedForEmail = $ENV:BUILD_REQUESTEDFOREMAIL
 if (-not $BuildRequestedForName) {
     [string]$BuildRequestedForEmail = & $GitCommand log -1 --pretty=format:'%ae'
 }
+$RepositorySegments = $Repository.Segments | Select-Object -Last 2
+$RepositoryOwner = $RepositorySegments[0].TrimEnd('/')
+$RepositoryName = [System.IO.Path]::GetFileNameWithoutExtension($RepositorySegments[1])
 
 [System.Net.ServicePointManager]::SecurityProtocol = `
     [System.Net.ServicePointManager]::SecurityProtocol -bor `
@@ -46,19 +49,48 @@ if (-not $BuildRequestedForName) {
 $GitHubGraphQLHeaders = @{
     Authorization = "Bearer $PersonalAccessToken"
 }
+Write-Host (Write-TaskDebug -AsOutput -Message "Retrieving repository and user information (including previously opened Pull Requests to close)")
 $BuildCommitQuery = @{
-    query = "query(`$owner: String!, `$repository: String!, `$commit: String!) {
-    repository(owner: `$owner, name: `$repository) {
-        url
-        object(expression: `$commit) {
-            commitUrl
-        }
+    query = "query(
+  `$sourceOwner: String!
+  `$sourceRepository: String!
+  `$sourceCommit: String!
+  `$targetOwner: String!
+  `$targetRepository: String!
+  `$username: String!
+) {
+  sourceRepository: repository(owner: `$sourceOwner, name: `$sourceRepository) {
+    url
+    object(expression: `$sourceCommit) {
+      commitUrl
     }
+  }
+  targetRepository: repository(owner: `$targetOwner, name: `$targetRepository) {
+    id
+    refs(refPrefix: `"refs/heads/dev.azure.com/`", first: 100) {
+      nodes {
+        name
+        associatedPullRequests(states: OPEN, first: 100) {
+          nodes {
+            id
+            number
+            url
+          }
+        }
+      }
+    }
+  }
+  user(login: `$username) {
+    id
+  }
 }"
     variables = @{
-        owner = $BuildRepositoryOwner
-        repository = $BuildRepositoryName
-        commit = $BuildSourceVersion
+        sourceOwner = $BuildRepositoryOwner
+        sourceRepository = $BuildRepositoryName
+        sourceCommit = $BuildSourceVersion
+        targetOwner = $RepositoryOwner
+        targetRepository = $RepositoryName
+        username = $Username
     }
 } | ConvertTo-Json -Compress
 $GitHubCommitResponse = Invoke-RestMethod -Body $BuildCommitQuery `
@@ -68,8 +100,10 @@ $GitHubCommitResponse = Invoke-RestMethod -Body $BuildCommitQuery `
 if ($GitHubCommitResponse.errors) {
     throw $GitHubCommitResponse.errors
 }
-$BuildRepositoryProjectUrl = $GitHubCommitResponse.data.repository.url
-$BuildSourceCommitUrl = $GitHubCommitResponse.data.repository.object.commitUrl
+$BuildRepositoryProjectUrl = $GitHubCommitResponse.data.sourceRepository.url
+$BuildSourceCommitUrl = $GitHubCommitResponse.data.sourceRepository.object.commitUrl
+$RepositoryId = $GitHubCommitResponse.data.targetRepository.id
+$GitHubUserId = $GitHubCommitResponse.data.user.id
 
 Write-Host (Write-TaskDebug -AsOutput -Message "Cloning repository $Repository")
 $ClonePath = Join-Path $PSScriptRoot ([System.Guid]::NewGuid())
@@ -136,29 +170,6 @@ Write-Host (Write-TaskDebug -AsOutput -Message "Pushing commit to remote")
 if ($LASTEXITCODE -ne 0) {
     throw "Push failed"
 }
-Write-Host (Write-TaskDebug -AsOutput -Message "Retrieving remote repository ID")
-$RepositorySegments = $Repository.Segments | Select-Object -Last 2
-$RepositoryOwner = $RepositorySegments[0].TrimEnd('/')
-$RepositoryName = [System.IO.Path]::GetFileNameWithoutExtension($RepositorySegments[1])
-$RepositoryIdQuery = @{
-    query = "query(`$owner: String!, `$repository: String!) {
-  repository(owner: `$owner, name: `$repository) {
-    id
-  }
-}"
-    variables = @{
-        owner = $RepositoryOwner
-        repository = $RepositoryName
-    }
-} | ConvertTo-Json -Compress
-$RepositoryIdResponse = Invoke-RestMethod `
-    -Method Post -Uri "https://api.github.com/graphql" -Body $RepositoryIdQuery `
-    -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
-    -Verbose -ContentType "application/json"
-if ($RepositoryIdResponse.errors) {
-    throw $RepositoryIdResponse.errors
-}
-$RepositoryId = $RepositoryIdResponse.data.repository.id
 
 $ClientMutationId = [System.Guid]::NewGuid().ToString()
 Write-Host (Write-TaskDebug -AsOutput -Message "Creating Pull Request")
@@ -178,6 +189,7 @@ $PullRequestMutation = @{
       id
       number
       url
+      changedFiles
     }
     clientMutationId
   }
@@ -202,27 +214,9 @@ if ($PullRequestResponse.errors) {
 $PullRequestId = $PullRequestResponse.data.createPullRequest.pullRequest.id
 $PullRequestNumber = $PullRequestResponse.data.createPullRequest.pullRequest.number
 $PullRequestUrl = $PullRequestResponse.data.createPullRequest.pullRequest.url
+[int]$PullRequestChanges = $PullRequestResponse.data.createPullRequest.pullRequest.changedFiles
 $ClientMutationId = $PullRequestResponse.data.createPullRequest.clientMutationId
 Write-Host "Created Pull Request #$PullRequestNumber in $Repository at $PullRequestUrl"
-Write-Host (Write-TaskDebug -AsOutput -Message "Retrieving user id for login $Username")
-$GitHubUserQuery = @{
-    query = "query(`$username: String!) {
-  user(login: `$username) {
-    id
-  }
-}"
-    variables = @{
-        username = $Username
-    }
-} | ConvertTo-Json -Compress
-$GitHubUserResponse = Invoke-RestMethod `
-    -Method Post -Uri "https://api.github.com/graphql" -Body $GitHubUserQuery `
-    -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
-    -Verbose -ContentType "application/json"
-if ($GitHubUserResponse.errors) {
-    throw $GitHubUserResponse.errors
-}
-$GitHubUserId = $GitHubUserResponse.data.user.id
 Write-Host (Write-TaskDebug -AsOutput -Message "Assigning Pull Request to $Username")
 $GitHubGraphQLHeaders["Accept"] = "application/vnd.github.starfire-preview+json"
 $PullRequestMutation = @{
@@ -251,6 +245,69 @@ if ($PullRequestResponse.errors) {
     throw $PullRequestResponse.errors
 }
 $ClientMutationId = $PullRequestResponse.data.addAssigneesToAssignable.clientMutationId
+
+[System.Collections.Generic.List[string]]$PreviousBranches = [System.Collections.Generic.List[string]]::new()
+[System.Collections.ArrayList]$PreviousPullRequests = New-Object System.Collections.ArrayList
+foreach ($RepositoryRef in $GitHubCommitResponse.data.targetRepository.refs.nodes) {
+    $PreviousBranches.Add("dev.azure.com/" + $RepositoryRef.name) | Out-Null
+    foreach ($RepositoryOldPullRequest in $RepositoryRef.associatedPullRequests.nodes) {
+        $PreviousPullRequests.Add($RepositoryOldPullRequest) | Out-Null
+    }
+}
+
+[bool]$NeedClosePullRequests = $false
+[System.Text.StringBuilder]$QueryBuilder = New-Object System.Text.StringBuilder
+$QueryBuilder.AppendLine("mutation(`$clientMutationId: String) {") | Out-Null
+if ($PullRequestChanges -lt 1) {
+    Write-Host "Closing newly created Pull Request because of unaffected changes"
+    $PreviousBranches.Add($BranchName) | Out-Null
+    $QueryBuilder.AppendLine("  pr0: closePullRequest(
+    input: {
+      pullRequestId: `"$($PullRequestId)`"
+      clientMutationId: `$clientMutationId
+    }
+  ) {
+    clientMutationId
+  }") | Out-Null
+    $NeedClosePullRequests = $true
+}
+$PreviousPullRequestIdx = 1
+foreach ($PullRequest in $PreviousPullRequests) {
+    Write-Host (Write-TaskDebug -AsOutput -Message "Closing previous Pull Request #$($PullRequest.number) ($($PullRequest.url))")
+
+    $PullRequestName = "pr$($PreviousPullRequestIdx.ToString([System.Globalization.CultureInfo]::InvariantCulture))"
+    $QueryBuilder.AppendLine("  $($PullRequestName): closePullRequest(
+    input: {
+      pullRequestId: `"$($PullRequest.id)`"
+      clientMutationId: `$clientMutationId
+    }
+  ) {
+    clientMutationId
+  }") | Out-Null
+
+    $NeedClosePullRequests = $true
+    $PreviousPullRequestIdx++
+}
+$QueryBuilder.AppendLine("}") | Out-Null
+if ($NeedClosePullRequests) {
+    $ClosePullRequestPayload = @{
+        query = $QueryBuilder.ToString()
+        variables = @{ clientMutationId = $ClientMutationId }
+    } | ConvertTo-Json -Compress
+    $GitHubGraphQLHeaders["Accept"] = "application/vnd.github.ocelot-preview+json"
+    $ClosePullRequestResponse = Invoke-RestMethod `
+        -Method Post -Uri "https://api.github.com/graphql" -Body $ClosePullRequestPayload `
+        -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
+        -Verbose -ContentType "application/json"
+    if ($ClosePullRequestResponse.errors) {
+        throw $ClosePullRequestResponse.errors
+    }
+}
+
+foreach ($ObsoleteBranchName in $PreviousBranches) {
+    Write-Host "Deleting remote branch $ObsoleteBranchName"
+    & $GitCommand push $CloneUri ":$ObsoleteBranchName"
+}
 
 Pop-Location
 Remove-Item $ClonePath -Force -Recurse

@@ -19,6 +19,7 @@ jobs:
       - https://github.com/thnetii/azure-msbuild.git
       - https://github.com/thnetii/nuget.git
       - https://github.com/thnetii/docgen-net.git
+      - https://github.com/thnetii/pubtrans.git
       - https://github.com/thnetii/sharepoint.git
       - https://github.com/thnetii/jose.git
       - https://github.com/thnetii/acme.git
