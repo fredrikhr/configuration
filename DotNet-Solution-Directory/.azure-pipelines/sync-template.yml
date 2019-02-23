@@ -4,7 +4,9 @@ steps:
 - ${{ each r in parameters.repositories }}:
   - task: PowerShell@2
     displayName: 'Sync ${{ r }}'
+    condition: true
     inputs:
       targetType: 'filePath'
       filePath: ./DotNet-Solution-Directory/.azure-pipelines/SyncRepository.ps1
       arguments: '-Verbose -Repository ${{ r }} -PersonalAccessToken $(GitHubPersonalAccessToken) -Username $(GitHubUsername)'
+    continueOnError: true
