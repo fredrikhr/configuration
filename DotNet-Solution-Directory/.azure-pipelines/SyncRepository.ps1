@@ -96,7 +96,7 @@ foreach ($SyncFileItem in $SyncFilesList) {
     $SourceFileFilter = $SyncFileItem.source
     [System.IO.FileSystemInfo[]]$SourceFileInfos = Get-ChildItem $SourceRootPath -Force -Filter $SourceFileFilter
     $DestinationPath = $SyncFileItem.destinationFolder
-    Write-Host (Write-TaskDebug -AsOutput -Message "Copying files from source to local branch:" + [System.Environment]::NewLine + "\t" + [string]::Join([System.Environment]::NewLine + "\t", $SourceFileInfos) + [System.Environment]::NewLine + "Destination: $DestinationPath")
+    Write-Host (Write-TaskDebug -AsOutput -Message ("Copying files from source to local branch:" + [System.Environment]::NewLine + "\t" + [string]::Join([System.Environment]::NewLine + "\t", $SourceFileInfos) + [System.Environment]::NewLine + "Destination: $DestinationPath"))
     if (-not (Test-Path $DestinationPath -PathType Container)) {
         New-Item -ItemType Directory $DestinationPath -Force -Verbose | Out-Null
     }
