@@ -10,7 +10,7 @@ changes made here to all my repositories (listed in `.azure-pipelines`)
 In your repository root, you can run the following command to fetch (or update) the solution support files.
 
 ``` sh
-curl -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/AllRules.ruleset" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Build.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Meta.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Version.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Build.targets"
+curl -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/AllRules.ruleset" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Build.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Meta.props" -LORJ "https://github.com/couven92/configuration/raw/master/DotNet-Solution-Directory/Directory.Version.props"
 ```
 
 My default solution directory structure:
