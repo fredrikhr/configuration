@@ -31,7 +31,6 @@ $BuildRepositorySegments = $BuildRepositoryUri.Segments | Select-Object -Last 2
 $BuildRepositoryOwner = $BuildRepositorySegments[0].TrimEnd('/')
 $BuildRepositoryName = [System.IO.Path]::GetFileNameWithoutExtension($BuildRepositorySegments[1])
 
-Write-Host (Write-TaskDebug -AsOutput -Message "Configuring git user")
 $BuildRequestedForName = $ENV:BUILD_REQUESTEDFOR
 if (-not $BuildRequestedForName) {
     [string]$BuildRequestedForName = & $GitCommand log -1 --pretty=format:'%an'
@@ -40,8 +39,6 @@ $BuildRequestedForEmail = $ENV:BUILD_REQUESTEDFOREMAIL
 if (-not $BuildRequestedForName) {
     [string]$BuildRequestedForEmail = & $GitCommand log -1 --pretty=format:'%ae'
 }
-& $GitCommand config --local user.name "$BuildRequestedForName"
-& $GitCommand config --local user.email "$BuildRequestedForEmail"
 
 [System.Net.ServicePointManager]::SecurityProtocol = `
     [System.Net.ServicePointManager]::SecurityProtocol -bor `
@@ -87,6 +84,10 @@ if ($LASTEXITCODE -ne 0) {
 Push-Location $ClonePath
 [string[]]$BaseBranchNameLines = & $GitCommand rev-parse --abbrev-ref HEAD
 $BaseBranchName = $BaseBranchNameLines | Select-Object -First 1
+
+Write-Host (Write-TaskDebug -AsOutput -Message "Configuring git user")
+& $GitCommand config --local user.name "$BuildRequestedForName"
+& $GitCommand config --local user.email "$BuildRequestedForEmail"
 
 $AgentId = $ENV:AGENT_ID
 if (-not $AgentId) {
