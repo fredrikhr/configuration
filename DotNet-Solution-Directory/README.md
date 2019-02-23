@@ -2,6 +2,11 @@
 
 I do a lot of .NET development. I also like my repository automatically set up for a multi-project directory structure.
 
+[![Build Status](https://dev.azure.com/couven92/configuration/_apis/build/status/dotnet-solution-sync?branchName=master)](https://dev.azure.com/couven92/configuration/_build/latest?definitionId=4&branchName=master)
+
+I have even created an Azure DevOps Build Pipeline to automatically sync all
+changes made here to all my repositories (listed in `.azure-pipelines`)
+
 In your repository root, you can run the following command to fetch (or update) the solution support files.
 
 ``` sh
