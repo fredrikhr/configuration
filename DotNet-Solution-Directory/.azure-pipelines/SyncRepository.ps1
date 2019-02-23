@@ -30,14 +30,18 @@ if (-not $BuildSourceVersion) {
 $BuildRepositorySegments = $BuildRepositoryUri.Segments | Select-Object -Last 2
 $BuildRepositoryOwner = $BuildRepositorySegments[0].TrimEnd('/')
 $BuildRepositoryName = [System.IO.Path]::GetFileNameWithoutExtension($BuildRepositorySegments[1])
+
+Write-Host (Write-TaskDebug -AsOutput -Message "Configuring git user")
 $BuildRequestedForName = $ENV:BUILD_REQUESTEDFOR
-$BuildRequestedForEmail = $ENV:BUILD_REQUESTEDFOREMAIL
-if (-not $BuildRequestedForName -or $BuildRequestedForEmail) {
-    [string[]]$BuildGitAuthorLines = & $GitCommand log -1 --pretty=format:'%an <%ae>'
-    $BuildGitAuthor = $BuildGitAuthorLines | Select-Object -First 1
-} else {
-    $BuildGitAuthor = "$BuildRequestedForName <$BuildRequestedForEmail>"
+if (-not $BuildRequestedForName) {
+    [string]$BuildRequestedForName = & $GitCommand log -1 --pretty=format:'%an'
 }
+$BuildRequestedForEmail = $ENV:BUILD_REQUESTEDFOREMAIL
+if (-not $BuildRequestedForName) {
+    [string]$BuildRequestedForEmail = & $GitCommand log -1 --pretty=format:'%ae'
+}
+& $GitCommand config --local user.name "$BuildRequestedForName"
+& $GitCommand config --local user.email "$BuildRequestedForEmail"
 
 [System.Net.ServicePointManager]::SecurityProtocol = `
     [System.Net.ServicePointManager]::SecurityProtocol -bor `
@@ -60,17 +64,26 @@ $BuildCommitQuery = @{
         commit = $BuildSourceVersion
     }
 } | ConvertTo-Json -Compress
-$GitHubCommitResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -SessionVariable HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $BuildCommitQuery
+$GitHubCommitResponse = Invoke-RestMethod -Body $BuildCommitQuery `
+    -Method Post -Uri "https://api.github.com/graphql" `
+    -Headers $GitHubGraphQLHeaders -SessionVariable HttpWebSession `
+    -Verbose -ContentType "application/json"
+if ($GitHubCommitResponse.errors) {
+    throw $GitHubCommitResponse.errors
+}
 $BuildRepositoryProjectUrl = $GitHubCommitResponse.data.repository.url
 $BuildSourceCommitUrl = $GitHubCommitResponse.data.repository.object.commitUrl
 
+Write-Host (Write-TaskDebug -AsOutput -Message "Cloning repository $Repository")
 $ClonePath = Join-Path $PSScriptRoot ([System.Guid]::NewGuid())
 $CloneUriBuilder = New-Object System.UriBuilder @($Repository)
 $CloneUriBuilder.UserName = $Username
 $CloneUriBuilder.Password = $PersonalAccessToken
 $CloneUri = $CloneUriBuilder.Uri
-Write-Host (Write-TaskDebug -AsOutput -Message "Cloning repository $Repository")
 & $GitCommand clone --depth 1 $CloneUri -- $ClonePath
+if ($LASTEXITCODE -ne 0) {
+    throw "Clone failed"
+}
 Push-Location $ClonePath
 [string[]]$BaseBranchNameLines = & $GitCommand rev-parse --abbrev-ref HEAD
 $BaseBranchName = $BaseBranchNameLines | Select-Object -First 1
@@ -113,26 +126,37 @@ Write-Host (Write-TaskDebug -AsOutput -Message "Staging all changes")
 & $GitCommand status
 Write-Host (Write-TaskDebug -AsOutput -Message "Creating new commit")
 $CommitMessage = "Synced files from commit $BuildSourceCommitUrl"
-& $GitCommand commit --allow-empty -m "$CommitMessage" --author $BuildGitAuthor
+& $GitCommand commit --allow-empty -m "$CommitMessage"
+if ($LASTEXITCODE -ne 0) {
+    throw "Commit failed"
+}
 Write-Host (Write-TaskDebug -AsOutput -Message "Pushing commit to remote")
 & $GitCommand push --force $CloneUri "HEAD:$BranchName"
-
+if ($LASTEXITCODE -ne 0) {
+    throw "Push failed"
+}
 Write-Host (Write-TaskDebug -AsOutput -Message "Retrieving remote repository ID")
 $RepositorySegments = $Repository.Segments | Select-Object -Last 2
 $RepositoryOwner = $RepositorySegments[0].TrimEnd('/')
 $RepositoryName = [System.IO.Path]::GetFileNameWithoutExtension($RepositorySegments[1])
 $RepositoryIdQuery = @{
     query = "query(`$owner: String!, `$repository: String!) {
-    repository(owner: `$owner, name: `$repository) {
-        id
-    }
+  repository(owner: `$owner, name: `$repository) {
+    id
+  }
 }"
     variables = @{
         owner = $RepositoryOwner
         repository = $RepositoryName
     }
 } | ConvertTo-Json -Compress
-$RepositoryIdResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $RepositoryIdQuery
+$RepositoryIdResponse = Invoke-RestMethod `
+    -Method Post -Uri "https://api.github.com/graphql" -Body $RepositoryIdQuery `
+    -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
+    -Verbose -ContentType "application/json"
+if ($RepositoryIdResponse.errors) {
+    throw $RepositoryIdResponse.errors
+}
 $RepositoryId = $RepositoryIdResponse.data.repository.id
 
 $ClientMutationId = [System.Guid]::NewGuid().ToString()
@@ -167,7 +191,13 @@ $PullRequestMutation = @{
     }
 } | ConvertTo-Json -Compress
 $GitHubGraphQLHeaders["Accept"] = "application/vnd.github.ocelot-preview+json"
-$PullRequestResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $PullRequestMutation
+$PullRequestResponse = Invoke-RestMethod `
+    -Method Post -Uri "https://api.github.com/graphql" -Body $PullRequestMutation `
+    -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
+    -Verbose -ContentType "application/json"
+if ($PullRequestResponse.errors) {
+    throw $PullRequestResponse.errors
+}
 $PullRequestId = $PullRequestResponse.data.createPullRequest.pullRequest.id
 $PullRequestNumber = $PullRequestResponse.data.createPullRequest.pullRequest.number
 $PullRequestUrl = $PullRequestResponse.data.createPullRequest.pullRequest.url
@@ -184,7 +214,13 @@ $GitHubUserQuery = @{
         username = $Username
     }
 } | ConvertTo-Json -Compress
-$GitHubUserResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $GitHubUserQuery
+$GitHubUserResponse = Invoke-RestMethod `
+    -Method Post -Uri "https://api.github.com/graphql" -Body $GitHubUserQuery `
+    -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
+    -Verbose -ContentType "application/json"
+if ($GitHubUserResponse.errors) {
+    throw $GitHubUserResponse.errors
+}
 $GitHubUserId = $GitHubUserResponse.data.user.id
 Write-Host (Write-TaskDebug -AsOutput -Message "Requesting Pull Request review from $Username")
 $PullRequestMutation = @{
@@ -205,7 +241,13 @@ $PullRequestMutation = @{
         clientMutationId = $ClientMutationId
     }
 } | ConvertTo-Json -Compress
-$PullRequestResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $PullRequestMutation
+$PullRequestResponse = Invoke-RestMethod `
+    -Method Post -Uri "https://api.github.com/graphql" -Body $PullRequestMutation `
+    -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
+    -Verbose -ContentType "application/json"
+if ($PullRequestResponse.errors) {
+    throw $PullRequestResponse.errors
+}
 $ClientMutationId = $PullRequestResponse.data.requestReviews.clientMutationId
 
 Pop-Location
