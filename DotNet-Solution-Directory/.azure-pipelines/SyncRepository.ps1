@@ -254,6 +254,8 @@ foreach ($RepositoryRef in $GitHubCommitResponse.data.targetRepository.refs.node
         $PreviousPullRequests.Add($RepositoryOldPullRequest) | Out-Null
     }
 }
+
+[bool]$NeedClosePullRequests = $false
 [System.Text.StringBuilder]$QueryBuilder = New-Object System.Text.StringBuilder
 $QueryBuilder.AppendLine("mutation(`$clientMutationId: String) {") | Out-Null
 if ($PullRequestChanges -lt 1) {
@@ -267,6 +269,7 @@ if ($PullRequestChanges -lt 1) {
   ) {
     clientMutationId
   }") | Out-Null
+    $NeedClosePullRequests = $true
 }
 $PreviousPullRequestIdx = 1
 foreach ($PullRequest in $PreviousPullRequests) {
@@ -282,20 +285,23 @@ foreach ($PullRequest in $PreviousPullRequests) {
     clientMutationId
   }") | Out-Null
 
+    $NeedClosePullRequests = $true
     $PreviousPullRequestIdx++
 }
 $QueryBuilder.AppendLine("}") | Out-Null
-$ClosePullRequestPayload = @{
-    query = $QueryBuilder.ToString()
-    variables = @{ clientMutationId = $ClientMutationId }
-} | ConvertTo-Json -Compress
-$GitHubGraphQLHeaders["Accept"] = "application/vnd.github.ocelot-preview+json"
-$ClosePullRequestResponse = Invoke-RestMethod `
-    -Method Post -Uri "https://api.github.com/graphql" -Body $ClosePullRequestPayload `
-    -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
-    -Verbose -ContentType "application/json"
-if ($ClosePullRequestResponse.errors) {
-    throw $ClosePullRequestResponse.errors
+if ($NeedClosePullRequests) {
+    $ClosePullRequestPayload = @{
+        query = $QueryBuilder.ToString()
+        variables = @{ clientMutationId = $ClientMutationId }
+    } | ConvertTo-Json -Compress
+    $GitHubGraphQLHeaders["Accept"] = "application/vnd.github.ocelot-preview+json"
+    $ClosePullRequestResponse = Invoke-RestMethod `
+        -Method Post -Uri "https://api.github.com/graphql" -Body $ClosePullRequestPayload `
+        -Headers $GitHubGraphQLHeaders -WebSession $HttpWebSession `
+        -Verbose -ContentType "application/json"
+    if ($ClosePullRequestResponse.errors) {
+        throw $ClosePullRequestResponse.errors
+    }
 }
 
 foreach ($ObsoleteBranchName in $PreviousBranches) {
