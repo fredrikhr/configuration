@@ -4,11 +4,10 @@ param(
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
     [string]$PersonalAccessToken,
-    [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
-    [string]$Username,
-    [Parameter(Mandatory = $true)]
-    [uri]$Repository
+    [string]$Username = "couven92",
+    [ValidateNotNull()]
+    [uri]$Repository = "https://github.com/thnetii/dotnet-common.git"
 )
 
 # Include LoggingCommandFunctions.ps1
@@ -18,29 +17,196 @@ $AzureDevOpsPipelinesPath = Join-Path -Resolve $PSScriptRoot ([string]::Join([Sy
 $GitCommand = Get-Command -CommandType Application "git" | Select-Object -First 1
 Write-Host (Write-TaskDebug -AsOutput -Message "Located git command: $GitCommand")
 
+[uri]$BuildRepositoryUri = $ENV:BUILD_REPOSITORY_URI
+if (-not $BuildRepositoryUri) {
+    [string[]]$BuildRepositoryUriLines = & $GitCommand remote get-url origin
+    [uri]$BuildRepositoryUri = $BuildRepositoryUriLines | Select-Object -First 1
+}
+$BuildSourceVersion = $ENV:BUILD_SOURCEVERSION
+if (-not $BuildSourceVersion) {
+    [string[]]$BuildSourceVersionLines = & $GitCommand rev-parse HEAD
+    $BuildSourceVersion = $BuildSourceVersionLines | Select-Object -First 1
+}
+$BuildRepositorySegments = $BuildRepositoryUri.Segments | Select-Object -Last 2
+$BuildRepositoryOwner = $BuildRepositorySegments[0].TrimEnd('/')
+$BuildRepositoryName = [System.IO.Path]::GetFileNameWithoutExtension($BuildRepositorySegments[1])
+$BuildRequestedForName = $ENV:BUILD_REQUESTEDFOR
+$BuildRequestedForEmail = $ENV:BUILD_REQUESTEDFOREMAIL
+if (-not $BuildRequestedForName -or $BuildRequestedForEmail) {
+    [string[]]$BuildGitAuthorLines = & $GitCommand log -1 --pretty=format:'%an <%ae>'
+    $BuildGitAuthor = $BuildGitAuthorLines | Select-Object -First 1
+} else {
+    $BuildGitAuthor = "$BuildRequestedForName <$BuildRequestedForEmail>"
+}
+
+[System.Net.ServicePointManager]::SecurityProtocol = `
+    [System.Net.ServicePointManager]::SecurityProtocol -bor `
+    [System.Net.SecurityProtocolType]::Tls12
+$GitHubGraphQLHeaders = @{
+    Authorization = "Bearer $PersonalAccessToken"
+}
+$BuildCommitQuery = @{
+    query = "query(`$owner: String!, `$repository: String!, `$commit: String!) {
+    repository(owner: `$owner, name: `$repository) {
+        url
+        object(expression: `$commit) {
+            commitUrl
+        }
+    }
+}"
+    variables = @{
+        owner = $BuildRepositoryOwner
+        repository = $BuildRepositoryName
+        commit = $BuildSourceVersion
+    }
+} | ConvertTo-Json -Compress
+$GitHubCommitResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -SessionVariable HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $BuildCommitQuery
+$BuildRepositoryProjectUrl = $GitHubCommitResponse.data.repository.url
+$BuildSourceCommitUrl = $GitHubCommitResponse.data.repository.object.commitUrl
+
 $ClonePath = Join-Path $PSScriptRoot ([System.Guid]::NewGuid())
 $CloneUriBuilder = New-Object System.UriBuilder @($Repository)
 $CloneUriBuilder.UserName = $Username
 $CloneUriBuilder.Password = $PersonalAccessToken
 $CloneUri = $CloneUriBuilder.Uri
-Write-Host (Write-SetProgress -AsOutput -Percent 0 -CurrenOperation "Cloning repository $Repository")
+Write-Host (Write-TaskDebug -AsOutput -Message "Cloning repository $Repository")
 & $GitCommand clone --depth 1 $CloneUri -- $ClonePath
 Push-Location $ClonePath
+[string[]]$BaseBranchNameLines = & $GitCommand rev-parse --abbrev-ref HEAD
+$BaseBranchName = $BaseBranchNameLines | Select-Object -First 1
 
-$BranchName = "dev.azure.com/"
-$BuildId = $ENV:BUILD_ID
 $AgentId = $ENV:AGENT_ID
-if ($AgentId) {
-    $BranchName += "agent-$AgentId"
-} else {
-    $BranchName += "agent-$([System.Guid]::NewGuid())"
+if (-not $AgentId) {
+    $AgentId = [System.Guid]::NewGuid().ToString()
 }
-if ($BuildId) {
-    $BranchName += "-build-$BuildId"
-} else {
-    $BranchName += "-build-$([System.Guid]::NewGuid())"
+$BuildId = $ENV:BUILD_ID
+if (-not $BuildId) {
+    $BuildId = [System.Guid]::NewGuid().ToString()
+}
+$BranchName = "dev.azure.com/agent-$AgentId-build-$BuildId"
+
+Write-Host (Write-TaskDebug -AsOutput -Message "Checking out new local branch $BranchName")
+& $GitCommand checkout -b $BranchName $BaseBranchName
+
+Write-Host (Write-TaskDebug -AsOutput -Message "Copying files from source to local branch")
+$SyncFilesRoot = Get-Content (Join-Path $PSScriptRoot "sync-files.json") | ConvertFrom-Json
+$SyncFilesList = $SyncFilesRoot.files
+$SourceRootPath = Join-Path -Resolve $PSScriptRoot "../.."
+foreach ($SyncFileItem in $SyncFilesList) {
+    $SourceFileFilter = $SyncFileItem.source
+    [System.IO.FileSystemInfo[]]$SourceFileInfos = Get-ChildItem $SourceRootPath -Force -Filter $SourceFileFilter
+    $DestinationPath = $SyncFileItem.destinationFolder
+    Write-Host (Write-TaskDebug -AsOutput -Message "Copying files from source to local branch:" + [System.Environment]::NewLine + "\t" + [string]::Join([System.Environment]::NewLine + "\t", $SourceFileInfos) + [System.Environment]::NewLine + "Destination: $DestinationPath")
+    if (-not (Test-Path $DestinationPath -PathType Container)) {
+        New-Item -ItemType Directory $DestinationPath -Force -Verbose | Out-Null
+    }
+    if ($SourceFileInfos.Length -gt 1 -or -not $SyncFileItem.filename) {
+        $SourceFileInfos | Copy-Item -Destination $DestinationPath -Force -Verbose
+    } else {
+        $DestinationPath = Join-Path $DestinationPath $SyncFileItem.filename
+        $SourceFileInfos | Copy-Item -Destination $DestinationPath -Force -Verbose
+    }
 }
 
-Write-Host (Write-SetProgress -AsOutput -Percent 0 -CurrenOperation "Checking out new local branch $BranchName")
-& $GitCommand checkout -b $BranchName origin/master
+Write-Host (Write-TaskDebug -AsOutput -Message "Staging all changes")
+& $GitCommand add .
+& $GitCommand status
+Write-Host (Write-TaskDebug -AsOutput -Message "Creating new commit")
+$CommitMessage = "Synced files from commit $BuildSourceCommitUrl"
+& $GitCommand commit --allow-empty -m "$CommitMessage" --author $BuildGitAuthor
+Write-Host (Write-TaskDebug -AsOutput -Message "Pushing commit to remote")
+& $GitCommand push --force $CloneUri "HEAD:$BranchName"
 
+Write-Host (Write-TaskDebug -AsOutput -Message "Retrieving remote repository ID")
+$RepositorySegments = $Repository.Segments | Select-Object -Last 2
+$RepositoryOwner = $RepositorySegments[0].TrimEnd('/')
+$RepositoryName = [System.IO.Path]::GetFileNameWithoutExtension($RepositorySegments[1])
+$RepositoryIdQuery = @{
+    query = "query(`$owner: String!, `$repository: String!) {
+    repository(owner: `$owner, name: `$repository) {
+        id
+    }
+}"
+    variables = @{
+        owner = $RepositoryOwner
+        repository = $RepositoryName
+    }
+} | ConvertTo-Json -Compress
+$RepositoryIdResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $RepositoryIdQuery
+$RepositoryId = $RepositoryIdResponse.data.repository.id
+
+$ClientMutationId = [System.Guid]::NewGuid().ToString()
+Write-Host (Write-TaskDebug -AsOutput -Message "Creating Pull Request")
+$PullRequestMutation = @{
+    query = "mutation(`$repositoryId: ID!, `$branch: String!, `$target: String!, `$title: String!, `$body: String, `$clientMutationId: String) {
+  createPullRequest(
+    input: {
+      repositoryId: `$repositoryId
+      baseRefName: `$target
+      headRefName: `$branch
+      title: `$title
+      body: `$body
+      clientMutationId: `$clientMutationId
+    }
+  ) {
+    pullRequest {
+      id
+      number
+      url
+    }
+    clientMutationId
+  }
+}"
+    variables = @{
+        repositoryId = $RepositoryId
+        branch = $BranchName
+        target = $BaseBranchName
+        title = "Sync files from $BuildRepositoryProjectUrl"
+        body = $CommitMessage
+        clientMutationId = $ClientMutationId
+    }
+} | ConvertTo-Json -Compress
+$GitHubGraphQLHeaders["Accept"] = "application/vnd.github.ocelot-preview+json"
+$PullRequestResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $PullRequestMutation
+$PullRequestId = $PullRequestResponse.data.createPullRequest.pullRequest.id
+$PullRequestNumber = $PullRequestResponse.data.createPullRequest.pullRequest.number
+$PullRequestUrl = $PullRequestResponse.data.createPullRequest.pullRequest.url
+$ClientMutationId = $PullRequestResponse.data.createPullRequest.clientMutationId
+Write-Host "Created Pull Request #$PullRequestNumber in $Repository at $PullRequestUrl"
+Write-Host (Write-TaskDebug -AsOutput -Message "Retrieving user id for login $Username")
+$GitHubUserQuery = @{
+    query = "query(`$username: String!) {
+  user(login: `$username) {
+    id
+  }
+}"
+    variables = @{
+        username = $Username
+    }
+} | ConvertTo-Json -Compress
+$GitHubUserResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $GitHubUserQuery
+$GitHubUserId = $GitHubUserResponse.data.user.id
+Write-Host (Write-TaskDebug -AsOutput -Message "Requesting Pull Request review from $Username")
+$PullRequestMutation = @{
+    query = "mutation(`$pullRequestId: ID!, `$userId: ID!, `$clientMutationId: String) {
+  requestReviews(
+    input: {
+      pullRequestId: `$pullRequestId
+      userIds: [`$userId]
+      clientMutationId: `$clientMutationId
+    }
+  ) {
+    clientMutationId
+  }
+}"
+    variables = @{
+        pullRequestId = $PullRequestId
+        userId = $GitHubUserId
+        clientMutationId = $ClientMutationId
+    }
+} | ConvertTo-Json -Compress
+$PullRequestResponse = Invoke-RestMethod -Method Post -Uri "https://api.github.com/graphql" -WebSession $HttpWebSession -Verbose -Headers $GitHubGraphQLHeaders -ContentType "application/json" -Body $PullRequestMutation
+$ClientMutationId = $PullRequestResponse.data.requestReviews.clientMutationId
+
+Pop-Location
+Remove-Item $ClonePath -Force -Recurse
