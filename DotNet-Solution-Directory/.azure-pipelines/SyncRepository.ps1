@@ -92,7 +92,7 @@ $AgentId = $ENV:AGENT_ID
 if (-not $AgentId) {
     $AgentId = [System.Guid]::NewGuid().ToString()
 }
-$BuildId = $ENV:BUILD_ID
+$BuildId = $ENV:BUILD_BUILDID
 if (-not $BuildId) {
     $BuildId = [System.Guid]::NewGuid().ToString()
 }
