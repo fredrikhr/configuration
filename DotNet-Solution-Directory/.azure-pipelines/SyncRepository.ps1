@@ -223,13 +223,14 @@ if ($GitHubUserResponse.errors) {
     throw $GitHubUserResponse.errors
 }
 $GitHubUserId = $GitHubUserResponse.data.user.id
-Write-Host (Write-TaskDebug -AsOutput -Message "Requesting Pull Request review from $Username")
+Write-Host (Write-TaskDebug -AsOutput -Message "Assigning Pull Request to $Username")
+$GitHubGraphQLHeaders["Accept"] = "application/vnd.github.starfire-preview+json"
 $PullRequestMutation = @{
     query = "mutation(`$pullRequestId: ID!, `$userId: ID!, `$clientMutationId: String) {
-  requestReviews(
+  addAssigneesToAssignable(
     input: {
-      pullRequestId: `$pullRequestId
-      userIds: [`$userId]
+      assignableId: `$pullRequestId
+      assigneeIds: [`$userId]
       clientMutationId: `$clientMutationId
     }
   ) {
@@ -249,7 +250,7 @@ $PullRequestResponse = Invoke-RestMethod `
 if ($PullRequestResponse.errors) {
     throw $PullRequestResponse.errors
 }
-$ClientMutationId = $PullRequestResponse.data.requestReviews.clientMutationId
+$ClientMutationId = $PullRequestResponse.data.addAssigneesToAssignable.clientMutationId
 
 Pop-Location
 Remove-Item $ClonePath -Force -Recurse
