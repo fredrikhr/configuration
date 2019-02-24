@@ -24,6 +24,10 @@
     {
       "source": "EditorConfig/.editorconfig",
       "destinationFolder": "."
+    },
+    {
+      "source": "Dependabot/config.yml",
+      "destinationFolder": ".dependabot"
     }
   ]
 }
