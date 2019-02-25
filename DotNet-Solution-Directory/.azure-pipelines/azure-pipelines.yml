@@ -30,6 +30,7 @@ jobs:
       - https://github.com/thnetii/windows-api.git
       - https://github.com/thnetii/webservices.git
       - https://github.com/thnetii/office.git
+      - https://github.com/thnetii/openstreetmap.git
       - https://github.com/couven92/tower-3d-pro.git
       - https://github.com/couven92/tcp-test.git
       - https://github.com/couven92/irc-chatter-bot.git
