@@ -25,8 +25,10 @@ Therefore I enforce LF line-endings by Git for the affected files. On Linux, the
 
 ## `.gitignore` file
 
+This downloads the most recent version of the Visual Studio `.gitignore` on the master-branch of https://github.com/github/gitignore
+
 Download command:
 
 ``` sh
-curl -o .gitignore -LRJ "https://github.com/couven92/configuration/raw/master/GitFiles/.gitignore"
+curl -o .gitignore -LRJ "https://github.com/github/gitignore/raw/master/VisualStudio.gitignore"
 ```
