@@ -21,12 +21,15 @@
     <Features>IOperation</Features>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <Import Condition="Exists('$(MSBuildThisFileDirectory)\Directory.Version.props')" Project="$(MSBuildThisFileDirectory)\Directory.Version.props" />
   <PropertyGroup Label="Version" Condition="'$(VersionPrefix)'!=''">
     <!--<VersionPrefix>0.0.1</VersionPrefix>-->
     <FileVersion>$(VersionPrefix)</FileVersion>
-    <AssemblyVersion Condition="'$(BuildId)'==''">$(FileVersion)</AssemblyVersion>
-    <AssemblyVersion Condition="'$(BuildId)'!=''">$(FileVersion).$(BuildId)</AssemblyVersion>
+    <AssemblyVersion>$(FileVersion)</AssemblyVersion>
+  </PropertyGroup>
+  <PropertyGroup Label="CI Build" Condition="'$(BuildId)'!=''">
+    <VersionSuffix Condition="'$(VersionSuffix)'!=''">$(VersionSuffix)-build$(BuildId)</VersionSuffix>
+    <VersionSuffix Condition="'$(VersionSuffix)'==''">build$(BuildId)</VersionSuffix>
+    <AssemblyVersion Condition="'$(FileVersion)'!=''">$(FileVersion).$(BuildId)</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3" PrivateAssets="All" />
