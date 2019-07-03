@@ -6,5 +6,6 @@ param()
 [string]$fileName = $dlUri.Segments | Select-Object -Last 1
 $filePath = Join-Path $PSScriptRoot $fileName
 [System.Net.ServicePointManager]::SecurityProtocol = `
+    [System.Net.ServicePointManager]::SecurityProtocol -bor `
     [System.Net.SecurityProtocolType]::Tls12
 Invoke-WebRequest -Uri $dlUri -OutFile $filePath
