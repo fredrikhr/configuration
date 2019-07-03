@@ -1,34 +1,40 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.wordWrap": "off",
-    "editor.rulers": [
-        80,
-        120
-    ],
-    "files.associations": {
-        "*.mak": "makefile",
-        "*.resx": "xml",
-        "*.*proj": "msbuild",
-        "*.props": "msbuild",
-        "*.ruleset": "xml"
-    },
-    "terminal.integrated.shell.windows": "cmd.exe",
-    "python.formatting.provider": "autopep8",
-    "python.linting.lintOnSave": true,
-    "python.linting.pylintUseMinimalCheckers": false,
-    "editor.renderWhitespace": "all",
-    "omnisharp.projectLoadTimeout": 3600,
-    "explorer.openEditors.visible": 0,
-    "extensions.showRecommendationsOnlyOnDemand": true,
-    "[markdown]": {
-        "editor.wordWrap": "bounded",
-        "editor.wordWrapColumn": 80,
-        "editor.quickSuggestions": false
-    },
-    "workbench.iconTheme": "vscode-icons",
-    "vsicons.dontShowNewVersionMessage": true,
-    "[html]": {
-        "editor.defaultFormatter": "vscode.html-language-features"
-    },
-    "C_Cpp.updateChannel": "Insiders"
+  "editor.wordWrap": "off",
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "files.associations": {
+    "*.mak": "makefile",
+    "*.resx": "xml",
+    "*.*proj": "msbuild",
+    "*.props": "msbuild",
+    "*.ruleset": "xml"
+  },
+  "terminal.integrated.shell.windows": "cmd.exe",
+  "python.formatting.provider": "autopep8",
+  "python.linting.lintOnSave": true,
+  "python.linting.pylintUseMinimalCheckers": false,
+  "editor.renderWhitespace": "all",
+  "omnisharp.projectLoadTimeout": 3600,
+  "explorer.openEditors.visible": 0,
+  "extensions.showRecommendationsOnlyOnDemand": true,
+  "workbench.iconTheme": "vscode-icons",
+  "vsicons.dontShowNewVersionMessage": true,
+  "C_Cpp.updateChannel": "Insiders",
+  "[markdown]": {
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 80,
+    "editor.quickSuggestions": false
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
