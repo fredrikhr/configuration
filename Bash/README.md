@@ -7,5 +7,5 @@ Similar to the [PowerShell](../PowerShell/README.md) configuration, I like to di
 Even though a little counter-intuitive, the prompt script is added to system-wide `bash_completion.d` folder. This folder is included **after** the user-local `.bashrc` is sourced, so setting the `PS1` variable is safe when placed in `bash_completion.d`.
 
 ```bash
-sudo ln -sv /etc/bash_completion.d/prompt-new-line.bash ~/.config/repository/Bash/prompt-new-line.bash
+sudo cp -fv ~/.config/repository/Bash/prompt-new-line.bash /etc/bash_completion.d/prompt-new-line.bash
 ```
