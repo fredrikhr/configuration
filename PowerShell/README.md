@@ -22,8 +22,8 @@ curl -LRJ -o "%APPDATA%\Configuration Repository\PowerShell\ps1.d\dotnet-suggest
 dotnet tool install --global dotnet-suggest
 ln -sv ~/.config/repository/PowerShell ~/.config/powershell
 cp -fv ~/.config/repository/PowerShell/profile.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1
-curl -LRJ -o "~/.config/repository/PowerShell/ps1.d/dotnet-suggest-shim.ps1" "https://github.com/dotnet/command-line-api/raw/master/src/System.CommandLine.Suggest/dotnet-suggest-shim.ps1"
-sudo curl -LRJ -o /etc/bash_competion.d/dotnet-suggest-shim.bash "https://github.com/dotnet/command-line-api/raw/master/src/System.CommandLine.Suggest/dotnet-suggest-shim.bash"
+curl -LRJ -o ~/.config/repository/PowerShell/ps1.d/dotnet-suggest-shim.ps1 "https://github.com/dotnet/command-line-api/raw/master/src/System.CommandLine.Suggest/dotnet-suggest-shim.ps1"
+sudo curl -LRJ -o /etc/bash_completion.d/dotnet-suggest-shim.bash "https://github.com/dotnet/command-line-api/raw/master/src/System.CommandLine.Suggest/dotnet-suggest-shim.bash"
 ```
 
 ## Custom Prompt
