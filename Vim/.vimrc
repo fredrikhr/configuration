@@ -93,7 +93,7 @@ let g:vim_json_syntax_conceal = 0
 filetype plugin on
 
 let g:OmniSharp_server_type = 'roslyn'
-let g:OmniSharp_server_path = '%APPDATA%\OmniSharp\omnisharp.http\v1.32.1\OmniSharp.exe'
+let g:OmniSharp_server_path = 'OmniSharp'
 
 "This is the default value, setting it isn't actually necessary
 let g:OmniSharp_host = "http://localhost:2000"
