@@ -39,16 +39,11 @@ Plugin 'tpope/vim-dispatch'
 " Syntastic
 Plugin 'scrooloose/syntastic'
 
-" NeoComplete
-Plugin 'Shougo/neocomplete.vim'
-
 " OmniSharp Vim
 Plugin 'OmniSharp/omnisharp-vim'
 
 " Vim-JSON
 Plugin 'elzr/vim-json'
-
-Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'zah/nim.vim'
 " Plugin 'baabelfish/nvim-nim'
