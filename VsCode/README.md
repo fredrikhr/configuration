@@ -21,16 +21,14 @@ I have found that the most reliable way to set up VsCode to use the settings and
 ``` cmd
 REM Delete existing VsCode Configuration Folder
 RD /S /Q "%APPDATA%\Code\User"
-MD "%APPDATA%\Code"
-MKLINK /J "%APPDATA%\Code\User" "%APPDATA%\Configuration Repository\VsCode"
+MD "%APPDATA%\Code" && MKLINK /J "%APPDATA%\Code\User" "%APPDATA%\Configuration Repository\VsCode"
 ```
 
 ### Linux
 
 ``` sh
 rm -rfv ~/.config/Code/User
-mkdir -p ~/.config/Code
-ln -sv ~/.config/repository/VsCode ~/.config/Code/User
+mkdir -p ~/.config/Code && ln -fsv ~/.config/repository/VsCode ~/.config/Code/User
 ```
 
 ### Future
