@@ -8,8 +8,7 @@ function Update-PipPackages {
         [Parameter(ValueFromPipeline=$true)]
         [PSObject[]]$PythonCommand,
         [string[]]$ExcludePackages,
-        [switch]$UserInstall=$false,
-        [switch]$UpdatePip=$false
+        [switch]$UserInstall=$false
     )
 
     if (-not $PythonCommand) {
@@ -31,24 +30,30 @@ function Update-PipPackages {
         } else {
             $PyPath = "$PyCmd"
         }
-        if ($UpdatePip) {
-            if ($PSCmdlet.ShouldProcess("$PyPath -m pip", "Update pip before determining outdated packages?", "$PyPath $PipInstallArgs pip")) {
-                $PSCmdlet.WriteVerbose("$PyPath $PipInstallArgs pip")
-                & $PyPath $PipInstallArgs pip
-                if ($LASTEXITCODE) {
-                    $PSCmdlet.WriteError("Command invocation `"$PyPath -m pip`" returned with exit code $LASTEXITCODE")
-                    return
-                }
+        if ($PSCmdlet.ShouldProcess("$PyPath -m pip", "Update pip before determining outdated packages?", "$PyPath $PipInstallArgs pip")) {
+            $PSCmdlet.WriteVerbose("$PyPath $PipInstallArgs pip")
+            & $PyPath $PipInstallArgs pip
+            [System.Console]::ResetColor()
+            if ($LASTEXITCODE -ne 0) {
+                $PSCmdlet.WriteError("Command invocation `"$PyPath -m pip`" returned with exit code $LASTEXITCODE")
+                return
             }
         }
         $PSCmdlet.WriteVerbose("$PyPath -m pip list --outdated")
         [string[]]$PipPackages = (& $PyPath -m pip list --outdated --format=freeze | ForEach-Object { $_.Split("=", 2) | Select-Object -First 1 } | Where-Object { $_ -inotin $ExcludePackages })
-        $PSCmdlet.WriteError("Command invocation `"$PyPath -m pip`" returned with exit code $LASTEXITCODE")
+        [System.Console]::ResetColor()
+        if ($LASTEXITCODE -ne 0) {
+            return
+        }
         return
         if ($PipPackages) {
             if ($PSCmdlet.ShouldProcess("$PyPath -m pip", "Update the following pip packages?`n$PipPackages", "$PyPath $PipInstallArgs $PipPackages")) {
                 $PSCmdlet.WriteVerbose("$PyPath $PipInstallArgs $PipPackages")
                 & $PyPath $PipInstallArgs $PipPackages
+                [System.Console]::ResetColor()
+                if ($LASTEXITCODE -ne 0) {
+                    return
+                }
             }
         } else {
             $PSCmdlet.WriteWarning("No packages to upgrade")
