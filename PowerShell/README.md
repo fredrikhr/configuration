@@ -18,7 +18,7 @@ COPY /Y "%APPDATA%\Configuration Repository\PowerShell\profile.ps1" "%USERPROFIL
 
 ``` sh
 ln -sfv ~/.config/repository/PowerShell ~/.config/powershell
-#ln -sfv ~/.config/repository/PowerShell/profile.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1
+ln -sfv ~/.config/repository/PowerShell/profile.ps1 ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 ```
 
 ## Custom Prompt
