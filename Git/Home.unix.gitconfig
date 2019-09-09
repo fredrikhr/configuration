@@ -1,2 +1,4 @@
+[credentials]
+    helper = cache
 [include]
 	path = ~/.config/repository/Git/git-all.common.gitconfig
