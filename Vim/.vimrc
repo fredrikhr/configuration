@@ -93,10 +93,11 @@ let g:vim_json_syntax_conceal = 0
 filetype plugin on
 
 let g:OmniSharp_server_type = 'roslyn'
-let g:OmniSharp_server_path = 'OmniSharp'
+" let g:OmniSharp_server_path = 'OmniSharp'
 
 "This is the default value, setting it isn't actually necessary
-let g:OmniSharp_host = "http://localhost:2000"
+" let g:OmniSharp_host = "http://localhost:2000"
+let g:OmniSharp_server_stdio = 1
 
 "Set the type lookup function to use the preview window instead of the status line
 "let g:OmniSharp_typeLookupInPreview = 1
@@ -114,7 +115,7 @@ set noshowmatch
 "let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
 "let g:SuperTabClosePreviewOnPopupClose = 1
 
-let g:OmniSharp_selector_ui = 'ctrlp'  " Use ctrlp.vim
+" let g:OmniSharp_selector_ui = 'ctrlp'  " Use ctrlp.vim
 
 "don't autoselect first item in omnicomplete, show if only one item (for preview)
 "remove preview if you don't want to see any documentation whatsoever.
