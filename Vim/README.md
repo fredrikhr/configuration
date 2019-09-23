@@ -12,8 +12,7 @@ COPY "%USERPROFILE%\.vim\config\home.vimrc" "%USERPROFILE%\.vimrc"
 ## Linux
 
 ``` sh
-mkdir -p ~/.vim
-git clone https://github.com/VundleVim/Vundle.vim.git -- ~/.vim/bundle/Vundle.vim
-ln -sfv ~/.config/repository/Vim ~/.vim/config
-ln -sfv ~/.vim/config/home.vimrc ~/.vimrc
+git clone https://github.com/VundleVim/Vundle.vim.git -- ~/.vim/bundle/Vundle.vim \
+  && ln -sfv ~/.config/repository/Vim ~/.vim/config \
+  && ln -sfv ~/.vim/config/home.vimrc ~/.vimrc
 ```
