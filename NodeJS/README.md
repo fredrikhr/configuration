@@ -11,6 +11,6 @@ The `npm-global.sh` script accomplishes this automatically. If copied to the sys
 You can also enable bash-completion by adding the npm-completion to the system-wide bash completion folder.
 
 ``` sh
-sudo cp -fv ~/.config/repository/NodeJS/npm-global.sh /etc/profile.d/npm-global.sh
-echo "source <(npm completion)" | sudo dd of=/etc/bash_completion.d/npm
+sudo cp -fv ~/.config/repository/NodeJS/npm-global.sh /etc/profile.d/npm-global.sh \
+&& sudo cp -fv ~/.config/repository/NodeJS/npm-completion.sh /etc/bash_completion.d/npm-completion.sh
 ```
