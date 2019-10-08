@@ -1,5 +1,12 @@
 # Bash configuration
 
+By default bash looks for a user profile local file called `~/.bash_aliases`.
+Usually this file is reserved for creating aliases for your local bash session.
+I have chosen to extend the default behaviour of putting files into .d folder.
+The `bash-aliases.bash` file causes bash to look for a folder `~/.bashrc.d` and
+dots (`.`) all files within that folder. That way, users with no sudo access
+can put their configurations into that folder instead.
+
 Similar to the [PowerShell](../PowerShell/README.md) configuration, I like to display an extra newline on the prompt of my shell, as it improves readability if the current working directory is a long path.
 
 ## Setup
@@ -8,4 +15,5 @@ Even though a little counter-intuitive, the prompt script is added to system-wid
 
 ```bash
 sudo cp -fv ~/.config/repository/Bash/prompt-new-line.bash /etc/bash_completion.d/prompt-new-line.bash
+ln -sfv ~/.config/repository/Bash/bash-aliases.bash ~/.bash_aliases
 ```
