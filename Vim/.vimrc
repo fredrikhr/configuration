@@ -14,6 +14,9 @@ set shiftwidth=4
 set smarttab
 set backspace=2 " make backspace work like most other apps
 
+set splitbelow
+set splitright
+
 " Render Whitespace
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<
 set list
