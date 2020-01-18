@@ -125,9 +125,9 @@ set previewheight=5
 let g:ale_linters = { 'cs': ['OmniSharp'] }
 
 " Update semantic highlighting after all text changes
-let g:OmniSharp_highlight_types = 3
+" let g:OmniSharp_highlight_types = 3
 " Update semantic highlighting on BufEnter and InsertLeave
-" let g:OmniSharp_highlight_types = 2
+let g:OmniSharp_highlight_types = 2
 
 augroup omnisharp_commands
     autocmd!
