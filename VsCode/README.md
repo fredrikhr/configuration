@@ -25,6 +25,13 @@ MD "%APPDATA%\Code" && MKLINK /J "%APPDATA%\Code\User" "%APPDATA%\Configuration 
 MD "%APPDATA%\Code - Insiders" && MKLINK /J "%APPDATA%\Code - Insiders\User" "%APPDATA%\Configuration Repository\VsCode"
 ```
 
+The PATH registration for VS Code is a little weird, so I prefer to modify my PATH manually for VS Code. I usually go for the default installation directory, so even when using a user install, I prefer to modify the System-wide PATH if privileged to do so.
+
+|Installation|`PATH`|
+|-|-|
+|User|`%LOCALAPPDATA%\Programs\Microsoft VS Code\bin`|
+|System|`C:\Program Files\Microsoft VS Code\bin`|
+
 ### Linux
 
 ``` sh
