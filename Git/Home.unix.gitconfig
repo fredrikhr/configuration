@@ -1,4 +1,4 @@
-[credentials]
-    helper = cache
 [include]
 	path = ~/.config/repository/Git/git-all.common.gitconfig
+[credential]
+	helper = !java -Ddebug=false -Djava.net.useSystemProxies=true -jar ~/.local/share/git-credential-manager/git-credential-manager-2.0.4.jar
