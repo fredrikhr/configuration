@@ -37,7 +37,7 @@ The PATH registration for VS Code is a little weird, so I prefer to modify my PA
 ``` sh
 rm -rfv ~/.config/Code/User
 mkdir -p ~/.config/Code && ln -fsv ~/.config/repository/VsCode ~/.config/Code/User
-mkdir -p "~/.config/Code -  Insiders" && ln -fsv ~/.config/repository/VsCode "~/.config/Code - Insiders/User"
+mkdir -p "~/.config/Code - Insiders" && ln -fsv ~/.config/repository/VsCode "~/.config/Code - Insiders/User"
 ```
 
 ### Future
