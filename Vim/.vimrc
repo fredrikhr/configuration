@@ -51,7 +51,10 @@ Plugin 'OmniSharp/omnisharp-vim'
 " Vim-JSON
 Plugin 'elzr/vim-json'
 
-" Plugin 'zah/nim.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 
 Plugin 'editorconfig/editorconfig-vim'
 
@@ -181,3 +184,33 @@ nnoremap <Leader>sp :OmniSharpStopServer<CR>
 " OmniSharp Configuration -- END
 " -----------------------------------------------------------------------------
 
+" Nim LSP Configuration
+" -----------------------------------------------------------------------------
+if executable('nimlsp')
+   au User lsp_setup call lsp#register_server({
+     \ 'name': 'nimlsp',
+     \ 'cmd': {server_info->['nimlsp']},
+     \ 'whitelist': ['nim'],
+     \ })
+endif
+
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('$TEMP/vim-lsp.log')
+
+" for asyncomplete.vim log
+let g:asyncomplete_log_file = expand('$TEMP/asyncomplete.log')
+
+let g:asyncomplete_auto_popup = 0
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Nim LSP Configuration -- END
+" -----------------------------------------------------------------------------
