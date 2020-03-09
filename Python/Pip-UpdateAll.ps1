@@ -100,6 +100,10 @@ foreach ($pyver in $PythonVersions) {
     $packages = $pipFreeze | ForEach-Object { $_.Split("==", 2)[0] }
     $pipFreeze | Select-Object -Property @{ Name = "Package"; Expression = { $_.Split("==", 2)[0] } }, `
     @{ Name = "Version"; Expression = { $_.Split("==", 2)[1] } } | Format-Table
+    if (-not $packages) {
+        $PSCmdlet.WriteVerbose("No packages to upgrade")
+        continue
+    }
 
     $pipCmdArgs = @("install", "--upgrade")
     if ($UserSite) {
