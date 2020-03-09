@@ -81,7 +81,6 @@ foreach ($pyver in $PythonVersions) {
         $pipCmdArgs += $packages
 
         if ($PSCmdlet.ShouldProcess($pipTarget, $pipCmdArgs)) {
-            $PSCmdlet.WriteVerbose("Performing the operation `"$pipCmdArgs`" on target `"$pipTarget`".")
             & $pycmd $pyargs $pipArgs $pipCmdArgs
             [System.Console]::ResetColor()
             if ($LASTEXITCODE -ne 0) {
@@ -112,7 +111,6 @@ foreach ($pyver in $PythonVersions) {
     $pipCmdArgs += $packages
 
     if ($PSCmdlet.ShouldProcess($pipTarget, $pipCmdArgs)) {
-        $PSCmdlet.WriteVerbose("Performing the operation `"$pipCmdArgs`" on target `"$pipTarget`".")
         & $pycmd $pyargs $pipArgs $pipCmdArgs
         [System.Console]::ResetColor()
         if ($LASTEXITCODE -ne 0) {
