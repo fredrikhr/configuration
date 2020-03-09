@@ -26,8 +26,8 @@ function Get-PythonCommandArguments {
     )
 
     begin {
-        [System.PlatformID]$Platform = $PSVersionTable["Platform"]
-        $WindowsPlatforms = @(
+        [System.PlatformID]$Platform = [System.Environment]::OSVersion.Platform
+        [System.PlatformID[]]$WindowsPlatforms = @(
             [System.PlatformID]::Win32NT,
             [System.PlatformID]::Win32S,
             [System.PlatformID]::Win32Windows,
@@ -83,6 +83,10 @@ foreach ($pyver in $PythonVersions) {
         if ($PSCmdlet.ShouldProcess($pipTarget, $pipCmdArgs)) {
             $PSCmdlet.WriteVerbose("Performing the operation `"$pipCmdArgs`" on target `"$pipTarget`".")
             & $pycmd $pyargs $pipArgs $pipCmdArgs
+            [System.Console]::ResetColor()
+            if ($LASTEXITCODE -ne 0) {
+                break
+            }
         }
     }
 
@@ -90,6 +94,9 @@ foreach ($pyver in $PythonVersions) {
     $PSCmdlet.WriteVerbose("Performing the operation `"$pipCmdArgs`" on target `"$pipTarget`".")
     $pipFreeze = & $pycmd $pyargs $pipArgs $pipCmdArgs
     [System.Console]::ResetColor()
+    if ($LASTEXITCODE -ne 0) {
+        break
+    }
     $packages = $pipFreeze | ForEach-Object { $_.Split("==", 2)[0] }
     $pipFreeze | Select-Object -Property @{ Name = "Package"; Expression = { $_.Split("==", 2)[0] } }, `
     @{ Name = "Version"; Expression = { $_.Split("==", 2)[1] } } | Format-Table
@@ -103,5 +110,9 @@ foreach ($pyver in $PythonVersions) {
     if ($PSCmdlet.ShouldProcess($pipTarget, $pipCmdArgs)) {
         $PSCmdlet.WriteVerbose("Performing the operation `"$pipCmdArgs`" on target `"$pipTarget`".")
         & $pycmd $pyargs $pipArgs $pipCmdArgs
+        [System.Console]::ResetColor()
+        if ($LASTEXITCODE -ne 0) {
+            break
+        }
     }
 }
