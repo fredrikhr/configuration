@@ -12,10 +12,18 @@ param (
     # Installing into the system-wide site may require administraive privileges.
     [Parameter()]
     [switch]
-    $UserSite
+    $UserSite,
+    # Packages to exclude from upgrade
+    [Parameter()]
+    [string[]]
+    $Exclude
 )
 
 $ErrorActionPreference = 'Stop'
+if (-not $Exclude) {
+    [string[]]$Exclude = @()
+}
+[System.Collections.Generic.HashSet[string]]$ExcludeSet = [System.Collections.Generic.HashSet[string]]::new($Exclude)
 
 function Get-PythonCommandArguments {
     [CmdletBinding()]
@@ -97,18 +105,21 @@ foreach ($pyver in $PythonVersions) {
         break
     }
     $packages = $pipFreeze | ForEach-Object { $_.Split("==", 2)[0] }
-    $pipFreeze | Select-Object -Property @{ Name = "Package"; Expression = { $_.Split("==", 2)[0] } }, `
-    @{ Name = "Version"; Expression = { $_.Split("==", 2)[1] } } | Format-Table
+    $pipFreeze | Select-Object -Property @{ Name = "Package"; Expression = { $_.Split("==", 2)[0] } },`
+    @{ Name = "Version"; Expression = { $_.Split("==", 2)[1] } },`
+    @{ Name = "Excluded"; Expression = { $ExcludeSet.Contains($_.Split("==", 2)[0]) } } | Format-Table
     if (-not $packages) {
         $PSCmdlet.WriteVerbose("No packages to upgrade")
         continue
     }
+    [System.Collections.Generic.HashSet[string]]$packagesSet = [System.Collections.Generic.HashSet[string]]::new($packages)
+    $packagesSet.ExceptWith($ExcludeSet)
 
     $pipCmdArgs = @("install", "--upgrade")
     if ($UserSite) {
         $pipCmdArgs += "--user"
     }
-    $pipCmdArgs += $packages
+    $pipCmdArgs += $packagesSet
 
     if ($PSCmdlet.ShouldProcess($pipTarget, $pipCmdArgs)) {
         & $pycmd $pyargs $pipArgs $pipCmdArgs
