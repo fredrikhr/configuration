@@ -105,15 +105,20 @@ foreach ($pyver in $PythonVersion) {
         break
     }
     [string[]]$packages = $pipFreeze | ForEach-Object { $_.Split("==", 2)[0] }
-    $pipFreeze | Select-Object -Property @{ Name = "Package"; Expression = { $_.Split("==", 2)[0] } },`
-    @{ Name = "Version"; Expression = { $_.Split("==", 2)[1] } },`
+    $pipFreeze | Select-Object -Property @{ Name = "Package"; Expression = { $_.Split("==", 2)[0] } }, `
+    @{ Name = "Version"; Expression = { $_.Split("==", 2)[1] } }, `
     @{ Name = "Upgrading"; Expression = { -not $ExcludeSet.Contains($_.Split("==", 2)[0]) } } | Format-Table
-    if (-not $packages) {
+    if ($packages) {
+        [System.Collections.Generic.HashSet[string]]$packagesSet = [System.Collections.Generic.HashSet[string]]::new([System.Collections.Generic.IEnumerable[string]]$packages)
+    }
+    else {
+        [System.Collections.Generic.HashSet[string]]$packagesSet = [System.Collections.Generic.HashSet[string]]::new()
+    }
+    $packagesSet.ExceptWith($ExcludeSet)
+    if ($packagesSet.Count -eq 0) {
         $PSCmdlet.WriteVerbose("No packages to upgrade")
         continue
     }
-    [System.Collections.Generic.HashSet[string]]$packagesSet = [System.Collections.Generic.HashSet[string]]::new([System.Collections.Generic.IEnumerable[string]]$packages)
-    $packagesSet.ExceptWith($ExcludeSet)
 
     $pipCmdArgs = @("install", "--upgrade")
     if ($UserSite) {
