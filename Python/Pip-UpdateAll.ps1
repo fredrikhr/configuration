@@ -3,7 +3,7 @@ param (
     # The python versions to invoke
     [Parameter()]
     [string[]]
-    $PythonVersions = @("2", "3"),
+    $PythonVersion = @("2", "3"),
     # Whether to skip upgrading pip befire proceeding
     [Parameter()]
     [switch]
@@ -74,7 +74,7 @@ function Get-PythonCommandArguments {
 }
 
 $pipArgs = @("-m", "pip")
-foreach ($pyver in $PythonVersions) {
+foreach ($pyver in $PythonVersion) {
     [object[]]$pyarray = Get-PythonCommandArguments $pyver
     $pycmd = $pyarray[0]
     [string[]]$pyargs = $pyarray | Select-Object -Skip 1
@@ -104,15 +104,15 @@ foreach ($pyver in $PythonVersions) {
     if ($LASTEXITCODE -ne 0) {
         break
     }
-    $packages = $pipFreeze | ForEach-Object { $_.Split("==", 2)[0] }
+    [string[]]$packages = $pipFreeze | ForEach-Object { $_.Split("==", 2)[0] }
     $pipFreeze | Select-Object -Property @{ Name = "Package"; Expression = { $_.Split("==", 2)[0] } },`
     @{ Name = "Version"; Expression = { $_.Split("==", 2)[1] } },`
-    @{ Name = "Excluded"; Expression = { $ExcludeSet.Contains($_.Split("==", 2)[0]) } } | Format-Table
+    @{ Name = "Upgrading"; Expression = { -not $ExcludeSet.Contains($_.Split("==", 2)[0]) } } | Format-Table
     if (-not $packages) {
         $PSCmdlet.WriteVerbose("No packages to upgrade")
         continue
     }
-    [System.Collections.Generic.HashSet[string]]$packagesSet = [System.Collections.Generic.HashSet[string]]::new($packages)
+    [System.Collections.Generic.HashSet[string]]$packagesSet = [System.Collections.Generic.HashSet[string]]::new([System.Collections.Generic.IEnumerable[string]]$packages)
     $packagesSet.ExceptWith($ExcludeSet)
 
     $pipCmdArgs = @("install", "--upgrade")
