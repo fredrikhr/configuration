@@ -191,10 +191,14 @@ nnoremap <Leader>sp :OmniSharpStopServer<CR>
 
 " Nim LSP Configuration
 " -----------------------------------------------------------------------------
-if executable('nimlsp')
+let s:nimlspexecutable = "nimlsp"
+if has('win32')
+  s:nimlspexecutable = "nimlsp.cmd"
+endif
+if executable(s:nimlspexecutable)
    au User lsp_setup call lsp#register_server({
      \ 'name': 'nimlsp',
-     \ 'cmd': {server_info->['nimlsp']},
+     \ 'cmd': {server_info->[s:nimlspexecutable]},
      \ 'whitelist': ['nim'],
      \ })
 endif
