@@ -1,5 +1,5 @@
 if strlen($TEMP) == 0 && !has('win32')
-  let $TEMP="/tmp"
+    let $TEMP="/tmp"
 endif
 set dir=$TEMP\\Vim\\swap,$TEMP\\Vim,$TEMP,/tmp/vim/swap,/tmp/vim,/tmp
 set bdir=$TEMP\\Vim\\backup,$TEMP\\Vim,$TEMP,/tmp/vim/backup,/tmp/vim,/tmp
@@ -192,8 +192,17 @@ nnoremap <Leader>sp :OmniSharpStopServer<CR>
 " Nim LSP Configuration
 " -----------------------------------------------------------------------------
 let s:nimlspexecutable = "nimlsp"
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+" for asyncomplete.vim log
+let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
+
+let g:asyncomplete_auto_popup = 0
+
 if has('win32')
-  s:nimlspexecutable = "nimlsp.cmd"
+    let s:nimlspexecutable = "nimlsp.cmd"
+    let g:lsp_log_file = expand('$TEMP/vim-lsp.log')
+    let g:asyncomplete_log_file = expand('$TEMP/asyncomplete.log')
 endif
 if executable(s:nimlspexecutable)
    au User lsp_setup call lsp#register_server({
@@ -202,14 +211,6 @@ if executable(s:nimlspexecutable)
      \ 'whitelist': ['nim'],
      \ })
 endif
-
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('$TEMP/vim-lsp.log')
-
-" for asyncomplete.vim log
-let g:asyncomplete_log_file = expand('$TEMP/asyncomplete.log')
-
-let g:asyncomplete_auto_popup = 0
 
 function! s:check_back_space() abort
     let col = col('.') - 1
