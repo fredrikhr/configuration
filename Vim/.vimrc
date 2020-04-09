@@ -1,3 +1,6 @@
+if strlen($TEMP) == 0 && !has('win32')
+  let $TEMP="/tmp"
+endif
 set dir=$TEMP\\Vim\\swap,$TEMP\\Vim,$TEMP,/tmp/vim/swap,/tmp/vim,/tmp
 set bdir=$TEMP\\Vim\\backup,$TEMP\\Vim,$TEMP,/tmp/vim/backup,/tmp/vim,/tmp
 set undodir=$TEMP\\Vim\\undo,$TEMP\\Vim,$TEMP,/tmp/vim/undo,/tmp/vim,/tmp
