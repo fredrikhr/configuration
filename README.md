@@ -10,8 +10,8 @@ I usually keep the same (or at least similar) directory structure on all my comp
 
 | OS | Git clone |
 | - | - |
-| Windows | `git clone https://github.com/couven92/configuration.git -- "%APPDATA%\Configuration Repository"` |
-| UNIX | `git clone https://github.com/couven92/configuration.git -- ~/.config/repository` |
+| Windows | `git clone https://github.com/fredrikhr/configuration.git -- "%APPDATA%\Configuration Repository"` |
+| UNIX | `git clone https://github.com/fredrikhr/configuration.git -- ~/.config/repository` |
 
 Notice that both commands are completely agnostic to Username and other influencing factors.  
 **Git will automatically create the folder if not present and will complain if it already *IS* present.**

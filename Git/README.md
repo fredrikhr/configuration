@@ -39,18 +39,18 @@ I sometimes do Open-Source development with multiple remotes in a single reposit
 | Local Branch | Remote-tracking Branch |
 | - | - |
 | `master` | `origin/master` |
-| `couven92-master` | `couven92/master` |
-| `couven92-feature` | `couven92/feature` |
+| `fredrikhr-master` | `fredrikhr/master` |
+| `fredrikhr-feature` | `fredrikhr/feature` |
 
 This is a problem if you do not configure your default push settings. Because of that I use the `tracking` setting as defined in [`git-push.gitconfig`](git-push.gitconfig). This will cause git to always push to the branch that is set up as the remote-tracking branch, regardless of differences in naming.
 
 From the third example in the list above I'd **one-time** configure my local branch using the following command:
 
 ``` sh
-git push -u couven92 couven92-feature:feature
+git push -u fredrikhr fredrikhr-feature:feature
 ```
 
-This will set up the local `couven92-feature` branch to track the `feature` branch one the `couven92` remote.
+This will set up the local `fredrikhr-feature` branch to track the `feature` branch one the `fredrikhr` remote.
 
 ## Git pretty log command
 
