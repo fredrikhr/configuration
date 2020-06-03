@@ -1,4 +1,6 @@
 [difftool]
 	prompt = true
+[merge]
+	conflictstyle = diff3
 [mergetool]
 	prompt = true
