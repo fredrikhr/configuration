@@ -15,6 +15,20 @@ stages:
         displayName:  Ubuntu (18.04 Bionic)
         pool:
           vmImage:    ubuntu-latest
+        variables:
+          ImageTags: |
+            base-ubuntu
+            base-ubuntu-amd64
+            base-ubuntu-18.04
+            base-ubuntu-amd64-18.04
+            base-ubuntu-bionic
+            base-ubuntu-amd64-bionic
+            base-$(Build.BuildNumber)-ubuntu
+            base-$(Build.BuildNumber)-ubuntu-amd64
+            base-$(Build.BuildNumber)-ubuntu-18.04
+            base-$(Build.BuildNumber)-ubuntu-amd64-18.04
+            base-$(Build.BuildNumber)-ubuntu-bionic
+            base-$(Build.BuildNumber)-ubuntu-amd64-bionic
         steps:
           - task: Docker@2
             displayName:  Login Docker Hub
@@ -24,25 +38,22 @@ stages:
           - task: Docker@2
             displayName:  Build Base Image (Ubuntu)
             inputs:
-              command:            buildAndPush
+              command:            build
               containerRegistry:  docker
               repository:         fredrikhr/devcontainer
               tags: |
-                base-ubuntu
-                base-ubuntu-amd64
-                base-ubuntu-18.04
-                base-ubuntu-amd64-18.04
-                base-ubuntu-bionic
-                base-ubuntu-amd64-bionic
-                base-$(Build.BuildId)-ubuntu
-                base-$(Build.BuildId)-ubuntu-amd64
-                base-$(Build.BuildId)-ubuntu-18.04
-                base-$(Build.BuildId)-ubuntu-amd64-18.04
-                base-$(Build.BuildId)-ubuntu-bionic
-                base-$(Build.BuildId)-ubuntu-amd64-bionic
+                $(ImageTags)
               buildContext:       Devcontainer/
               dockerfile:         Devcontainer/ubuntu-base.dockerfile
               arguments:          --platform linux/amd64
+          - task: Docker@2
+            displayName:  Push Base Image (Ubuntu)
+            inputs:
+              command:            push
+              containerRegistry:  docker
+              repository:         fredrikhr/devcontainer
+              tags: |
+                $(ImageTags)
           - task: Docker@2
             displayName:  Logout Docker Hub
             inputs:
