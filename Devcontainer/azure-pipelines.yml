@@ -9,18 +9,18 @@ stages:
           vmImage:    ubuntu-latest
         variables:
           ImageTags: |
-            base-ubuntu
-            base-ubuntu-amd64
-            base-ubuntu-18.04
-            base-ubuntu-amd64-18.04
-            base-ubuntu-bionic
-            base-ubuntu-amd64-bionic
-            base-$(Build.BuildNumber)-ubuntu
-            base-$(Build.BuildNumber)-ubuntu-amd64
-            base-$(Build.BuildNumber)-ubuntu-18.04
             base-$(Build.BuildNumber)-ubuntu-amd64-18.04
-            base-$(Build.BuildNumber)-ubuntu-bionic
             base-$(Build.BuildNumber)-ubuntu-amd64-bionic
+            base-$(Build.BuildNumber)-ubuntu-18.04
+            base-$(Build.BuildNumber)-ubuntu-bionic
+            base-$(Build.BuildNumber)-ubuntu-amd64
+            base-$(Build.BuildNumber)-ubuntu
+            base-ubuntu-amd64-18.04
+            base-ubuntu-amd64-bionic
+            base-ubuntu-18.04
+            base-ubuntu-bionic
+            base-ubuntu-amd64
+            base-ubuntu
         steps:
           - task: Docker@2
             displayName:  Login Docker Hub
