@@ -9,6 +9,7 @@ RUN     set -x \
     &&  apt-get install --yes --no-install-recommends \
             apt-transport-https \
             wget \
+            xz-utils \
     #
     # Clean up
     &&  apt-get autoremove -y \
@@ -166,7 +167,7 @@ RUN     set -x \
             libssl-dev \
     &&  cp -fv ~/.config/repository/Nim/choosenim.sh /etc/profile.d/choosenim.sh \
     &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
-    &&  ~/.nimble/bin/nimble install -y nimlsp \
+    &&  "/opt/nim_$NIM_VERSION/bin/nimble" install -y nimlsp \
     # Clean up
     &&  apt-get autoremove -y \
     &&  apt-get clean -y \
