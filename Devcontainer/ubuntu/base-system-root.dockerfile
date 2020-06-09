@@ -28,7 +28,7 @@ RUN     set -x \
     &&  git clone https://github.com/VundleVim/Vundle.vim.git -- ~/.vim/bundle/Vundle.vim  2>&1 \
     &&  ln -sfv ~/.config/repository/Vim ~/.vim/config \
     &&  ln -sfv ~/.vim/config/home.vimrc ~/.vimrc \
-    &&  vim -not-a-term +PluginInstall +qall &>/dev/null \
+    &&  vim -not-a-term +PluginInstall +qall \
     # End
     &&  true > /dev/null
 
