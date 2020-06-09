@@ -37,6 +37,7 @@ stages:
                 $(ImageTags)
               buildContext:       $(Build.SourcesDirectory)
               dockerfile:         Devcontainer/ubuntu/base-system-root.dockerfile
+              arguments:          --memory-swap -1
           - task: Docker@2
             displayName:  Push Base Image (Ubuntu)
             inputs:
