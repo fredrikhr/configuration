@@ -1,7 +1,7 @@
 name: $(Date:yyyy-MM-dd)-rev$(Rev:r)
 stages:
   - stage:        buildImages
-    displayName:  3rd Party Dependency Images
+    displayName:  Base Images
     jobs:
       - job:          ubuntu
         displayName:  Ubuntu (18.04 Bionic)
