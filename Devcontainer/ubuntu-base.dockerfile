@@ -167,7 +167,7 @@ RUN     set -x \
             build-essential \
             libssl-dev \
     &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
-    &&  nimble install -y nimlsp \
+    &&  bash -lc "nimble install -y nimlsp" \
     # Clean up
     &&  rm -rf /opt/nim-$NIM_VERSION/c_code ~/.cache \
     &&  apt-get autoremove -y \
