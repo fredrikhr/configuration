@@ -159,7 +159,7 @@ RUN     set -x \
     &&  export NIM_VERSION="$(curl -sL https://nim-lang.org/channels/stable)" \
     &&  curl -sL "https://nim-lang.org/download/nim-$NIM_VERSION-linux_x64.tar.xz" \
      |  tar -C /opt -xJ \
-    &&  echo "export PATH=\$PATH:/opt/nim_$NIM_VERSION/bin" | tee /etc/profile.d/nimpath.sh \
+    &&  echo "export PATH=\$PATH:/opt/nim-$NIM_VERSION/bin" | tee /etc/profile.d/nimpath.sh \
     #   Configuration
     &&  apt-get update \
     &&  apt-get install --yes --no-install-recommends \
@@ -167,7 +167,7 @@ RUN     set -x \
             libssl-dev \
     &&  cp -fv ~/.config/repository/Nim/choosenim.sh /etc/profile.d/choosenim.sh \
     &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
-    &&  "/opt/nim_$NIM_VERSION/bin/nimble" install -y nimlsp \
+    &&  "/opt/nim-$NIM_VERSION/bin/nimble" install -y nimlsp \
     # Clean up
     &&  apt-get autoremove -y \
     &&  apt-get clean -y \
