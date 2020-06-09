@@ -8,8 +8,9 @@ RUN     set -x \
 
 RUN     set -x \
     # Config: Bash
-    &&  cp -fv ~/.config/repository/Bash/prompt-new-line.bash /etc/bash_completion.d/prompt-new-line.bash \
-    &&  ln -sfv ~/.config/repository/Bash/bash-aliases.bash ~/.bash_aliases
+    &&  mkdir -p ~/bashrc.d/ \
+    &&  ln -sfv ~/.config/repository/Bash/bash-aliases.bash ~/.bash_aliases \
+    &&  ln -sfv ~/.config/repository/Bash/prompt-new-line.bash ~/bashrc.d/prompt-new-line.bash
 
 RUN     set -x \
     # Git
