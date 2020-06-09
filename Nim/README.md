@@ -13,5 +13,4 @@ user-local paths to Nimble and Choosenim.
 
 ``` sh
 sudo cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh
-sudo cp -fv ~/.config/repository/Nim/choosenim.sh /etc/profile.d/choosenim.sh
 ```

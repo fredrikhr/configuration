@@ -166,7 +166,6 @@ RUN     set -x \
     &&  apt-get install --yes --no-install-recommends \
             build-essential \
             libssl-dev \
-    &&  cp -fv ~/.config/repository/Nim/choosenim.sh /etc/profile.d/choosenim.sh \
     &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
     &&  nimble install -y nimlsp \
     # Clean up
