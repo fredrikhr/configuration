@@ -152,6 +152,24 @@ RUN     set -x \
     &&  apt-get clean -y \
     &&  rm -rf /var/lib/apt/lists/*
 
+RUN     set -x \
+    # Nim
+    #   Installation
+    &&  apt-get update \
+    &&  apt-get install --yes --no-install-recommends \
+            build-essential \
+    &&  curl https://nim-lang.org/choosenim/init.sh -sSf | bash /dev/stdin -y \
+    &&  mkdir -p /opt \
+    &&  cp -rf "$(cat ~/.choosenim/current)" /opt/nim \
+    &&  chmod -v a+x /opt/nim/bin/* \
+    &&  echo "export PATH=\$PATH:/opt/nim/bin" | tee /etc/profile.d/nimpath.sh \
+    &&  cp -fv ~/.config/repository/Nim/choosenim.sh /etc/profile.d/choosenim.sh \
+    &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
+    # Clean up
+    &&  apt-get autoremove -y \
+    &&  apt-get clean -y \
+    &&  rm -rf /var/lib/apt/lists/*
+
 ENV DEBIAN_FRONTEND=dialog
 ENV TERM=xterm-color
 
