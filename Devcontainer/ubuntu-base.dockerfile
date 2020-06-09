@@ -168,8 +168,9 @@ RUN     set -x \
             libssl-dev \
     &&  cp -fv ~/.config/repository/Nim/choosenim.sh /etc/profile.d/choosenim.sh \
     &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
-    &&  "/opt/nim-$NIM_VERSION/bin/nimble" install -y nimlsp \
+    &&  nimble install -y nimlsp \
     # Clean up
+    &&  rm -rf /opt/nim-$NIM_VERSION/c_code ~/.cache \
     &&  apt-get autoremove -y \
     &&  apt-get clean -y \
     &&  rm -rf /var/lib/apt/lists/*
