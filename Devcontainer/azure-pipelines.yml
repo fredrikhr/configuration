@@ -45,7 +45,6 @@ stages:
                 $(ImageTags)
               buildContext:       Devcontainer/
               dockerfile:         Devcontainer/ubuntu-base.dockerfile
-              arguments:          --platform linux/amd64
           - task: Docker@2
             displayName:  Push Base Image (Ubuntu)
             inputs:
