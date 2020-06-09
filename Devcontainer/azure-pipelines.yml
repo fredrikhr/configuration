@@ -1,0 +1,49 @@
+name: $(Date:yyyy-MM-dd)-rev$(Rev:r)
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+pr:
+  - '*'
+
+stages:
+  - stage:        buildImages
+    displayName:  Architecture-specifc Images
+    jobs:
+      - job:          ubuntu
+        displayName:  Ubuntu (18.04 Bionic)
+        pool:
+          vmImage:    ubuntu-latest
+        steps:
+          - task: Docker@2
+            displayName:  Login Docker Hub
+            inputs:
+              command:    login
+              containerRegistry:  docker
+          - task: Docker@2
+            displayName:  Build Base Image (Ubuntu)
+            inputs:
+              command:            build
+              containerRegistry:  docker
+              repository:         fredrikhr/devcontainer
+              tags: |
+                base-ubuntu
+                base-ubuntu-amd64
+                base-ubuntu-18.04
+                base-ubuntu-amd64-18.04
+                base-ubuntu-bionic
+                base-ubuntu-amd64-bionic
+                base-$(Build.BuildId)-ubuntu
+                base-$(Build.BuildId)-ubuntu-amd64
+                base-$(Build.BuildId)-ubuntu-18.04
+                base-$(Build.BuildId)-ubuntu-amd64-18.04
+                base-$(Build.BuildId)-ubuntu-bionic
+                base-$(Build.BuildId)-ubuntu-amd64-bionic
+              buildContext:       Devcontainer/
+              dockerfile:         Devcontainer/ubuntu-base.dockerfile
+          - task: Docker@2
+            displayName:  Logout Docker Hub
+            inputs:
+              command:    logout
+              containerRegistry:  docker
