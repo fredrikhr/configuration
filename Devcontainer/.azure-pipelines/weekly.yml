@@ -1,0 +1,54 @@
+name: $(Date:yyyy-MM-dd)-rev$(Rev:r)
+stages:
+  - stage:        buildImages
+    displayName:  3rd Party Dependency Images
+    jobs:
+      - job:          ubuntu
+        displayName:  Ubuntu (18.04 Bionic)
+        pool:
+          vmImage:    ubuntu-latest
+        variables:
+          ImageTags: |
+            base-thirdpartydeps-$(Build.BuildNumber)-ubuntu-amd64-18.04
+            base-thirdpartydeps-$(Build.BuildNumber)-ubuntu-amd64-bionic
+            base-thirdpartydeps-$(Build.BuildNumber)-ubuntu-18.04
+            base-thirdpartydeps-$(Build.BuildNumber)-ubuntu-bionic
+            base-thirdpartydeps-$(Build.BuildNumber)-ubuntu-amd64
+            base-thirdpartydeps-$(Build.BuildNumber)-ubuntu
+            base-thirdpartydeps-ubuntu-amd64-18.04
+            base-thirdpartydeps-ubuntu-amd64-bionic
+            base-thirdpartydeps-ubuntu-18.04
+            base-thirdpartydeps-ubuntu-bionic
+            base-thirdpartydeps-ubuntu-amd64
+            base-thirdpartydeps-ubuntu
+        steps:
+          - checkout: none
+          - task: Docker@2
+            displayName:  Login Docker Hub
+            inputs:
+              command:    login
+              containerRegistry:  docker
+          - task: Docker@2
+            displayName:  Build Base Image (Ubuntu)
+            inputs:
+              command:            build
+              containerRegistry:  docker
+              repository:         fredrikhr/devcontainer
+              tags: |
+                $(ImageTags)
+              buildContext:       Devcontainer/ubuntu/
+              dockerfile:         Devcontainer/ubuntu/weekly.dockerfile
+          - task: Docker@2
+            displayName:  Push Base Image (Ubuntu)
+            inputs:
+              command:            push
+              containerRegistry:  docker
+              repository:         fredrikhr/devcontainer
+              tags: |
+                $(ImageTags)
+          - task: Docker@2
+            displayName:  Logout Docker Hub
+            condition:    always()
+            inputs:
+              command:    logout
+              containerRegistry:  docker
