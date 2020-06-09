@@ -56,7 +56,7 @@ RUN     set -x \
     &&  apt-get install --yes --no-install-recommends \
             libssl-dev \
     &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
-    &&  nimble install -y nimlsp \
+    &&  bash -lc "nimble install -y nimlsp" \
     # Clean up
     &&  rm -rf ~/.cache \
     &&  apt-get autoremove -y \
