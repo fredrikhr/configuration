@@ -155,16 +155,18 @@ RUN     set -x \
 RUN     set -x \
     # Nim
     #   Installation
+    &&  export NIM_VERSION="$(curl -sL https://nim-lang.org/channels/stable)" \
+    &&  curl -sL "https://nim-lang.org/download/nim-$NIM_VERSION-linux_x64.tar.xz" \
+     |  tar -C /opt -xJ \
+    &&  echo "export PATH=\$PATH:/opt/nim_$NIM_VERSION/bin" | tee /etc/profile.d/nimpath.sh \
+    #   Configuration
     &&  apt-get update \
     &&  apt-get install --yes --no-install-recommends \
             build-essential \
-    &&  curl https://nim-lang.org/choosenim/init.sh -sSf | bash /dev/stdin -y \
-    &&  mkdir -p /opt \
-    &&  cp -rf "$(cat ~/.choosenim/current)" /opt/nim \
-    &&  chmod -v a+x /opt/nim/bin/* \
-    &&  echo "export PATH=\$PATH:/opt/nim/bin" | tee /etc/profile.d/nimpath.sh \
+            libssl-dev \
     &&  cp -fv ~/.config/repository/Nim/choosenim.sh /etc/profile.d/choosenim.sh \
     &&  cp -fv ~/.config/repository/Nim/nimble.sh /etc/profile.d/nimble.sh \
+    &&  ~/.nimble/bin/nimble install -y nimlsp \
     # Clean up
     &&  apt-get autoremove -y \
     &&  apt-get clean -y \
