@@ -16,4 +16,5 @@ Even though a little counter-intuitive, the prompt script is added to system-wid
 ```bash
 sudo cp -fv ~/.config/repository/Bash/prompt-new-line.bash /etc/bash_completion.d/prompt-new-line.bash
 ln -sfv ~/.config/repository/Bash/bash-aliases.bash ~/.bash_aliases
+mkdir -p ~/.bashrc.d && ln -sfv ~/.config/repository/Bash/bash-completion.sh ~/.bashrc.d/bash-completion.sh
 ```
