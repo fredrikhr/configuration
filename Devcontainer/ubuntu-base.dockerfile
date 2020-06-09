@@ -160,6 +160,7 @@ RUN     set -x \
     &&  curl -sL "https://nim-lang.org/download/nim-$NIM_VERSION-linux_x64.tar.xz" \
      |  tar -C /opt -xJ \
     &&  echo "export PATH=\$PATH:/opt/nim-$NIM_VERSION/bin" | tee /etc/profile.d/nimpath.sh \
+    &&  export PATH=$PATH:/opt/nim-$NIM_VERSION/bin \
     #   Configuration
     &&  apt-get update \
     &&  apt-get install --yes --no-install-recommends \
