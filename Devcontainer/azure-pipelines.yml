@@ -1,12 +1,4 @@
 name: $(Date:yyyy-MM-dd)-rev$(Rev:r)
-trigger:
-  batch: true
-  branches:
-    include:
-    - master
-pr:
-  - '*'
-
 stages:
   - stage:        buildImages
     displayName:  Architecture-specifc Images
