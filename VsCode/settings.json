@@ -13,6 +13,7 @@
     "*.ruleset": "xml"
   },
   "terminal.integrated.shell.windows": "cmd.exe",
+  "python.pythonPath": "python3",
   "python.formatting.provider": "autopep8",
   "python.linting.lintOnSave": true,
   "python.linting.pylintUseMinimalCheckers": false,
@@ -37,5 +38,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "git.autofetch": true
+  "git.autofetch": true,
+  "remote.SSH.remotePlatform": {
+    "admin.thnetii.td.org.uit.no": "windows"
+  },
+  "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)"
 }
