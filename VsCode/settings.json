@@ -41,6 +41,5 @@
   "git.autofetch": true,
   "remote.SSH.remotePlatform": {
     "admin.thnetii.td.org.uit.no": "windows"
-  },
-  "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)"
+  }
 }
