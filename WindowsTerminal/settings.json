@@ -65,6 +65,18 @@
         "hidden": false,
         "name": "PowerShell (dotnet global)",
         "source": "Windows.Terminal.PowershellCore"
+      },
+      {
+          "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+          "hidden": false,
+          "name": "Ubuntu-20.04",
+          "source": "Windows.Terminal.Wsl"
+      },
+      {
+          "guid": "{7c6965f2-1407-5f03-ab33-62c658c537a3}",
+          "hidden": false,
+          "name": "docker-wsl2-ubuntu",
+          "source": "Windows.Terminal.Wsl"
       }
     ]
   },
