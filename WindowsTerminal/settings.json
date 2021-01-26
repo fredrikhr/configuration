@@ -52,7 +52,7 @@
         "guid": "{6de382a6-4b05-43d8-918c-d51621d2927c}",
         "hidden": false,
         "name": "PWSH: thnetii.td.org.uit.no",
-        "commandline": "pwsh.exe -NoExit -Command \"$WinRMCredPath = [System.IO.Path]::Combine($ENV:LOCALAPPDATA, 'thnetii.td.org.uit.no', 'wincred.json'); if (Test-Path -PathType Leaf $WinRMCredPath) { $WinRMCred = New-Object PSCredential 'fredrik.h.rasch', (ConvertTo-SecureString -AsPlainText -Force ((Get-Content -LiteralPath $WinRMCredPath) | ConvertFrom-Json).'fredrik.h.rasch') } else { $WinRMCred = Get-Credential -Message 'Establish WinRM connection to thnetii.td.org.uit.no' -UserName 'fredrik.h.rasch' }; $WinRMSession = New-PSSession -UseSSL thnetii.td.org.uit.no -Credential $WinRMCred; Invoke-Command -Session $WinRMSession -ScriptBlock { $profile = Join-Path $ENV:USERPROFILE '.\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1'; . $profile }; Enter-PSSession $WinRMSession;\""
+        "commandline": "pwsh.exe -NoExit -Command \"$WinRMSession = New-PSSession -SshTransport thnetii.td.org.uit.no -UserName fredrik.h.rasch; Invoke-Command -Session $WinRMSession -ScriptBlock { $profile = Join-Path $ENV:USERPROFILE '.\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1'; . $profile }; Enter-PSSession $WinRMSession;\""
       },
       {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
