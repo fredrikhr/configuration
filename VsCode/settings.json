@@ -17,8 +17,8 @@
   "files.associations": {
     "*.mak": "makefile",
     "*.resx": "xml",
-    "*.*proj": "msbuild",
-    "*.props": "msbuild",
+    "*.*proj": "xml",
+    "*.props": "xml",
     "*.ruleset": "xml"
   },
   "editor.wordWrap": "off",
@@ -34,7 +34,6 @@
   "editor.renderWhitespace": "all",
   "omnisharp.projectLoadTimeout": 3600,
   "explorer.openEditors.visible": 0,
-  "extensions.showRecommendationsOnlyOnDemand": true,
   "workbench.iconTheme": "vscode-icons",
   "vsicons.dontShowNewVersionMessage": true,
   "git.autofetch": true
