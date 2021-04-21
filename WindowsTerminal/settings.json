@@ -49,6 +49,12 @@
         "source": "Windows.Terminal.Wsl"
       },
       {
+        "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+        "hidden": false,
+        "name": "Ubuntu-20.04",
+        "source": "Windows.Terminal.Wsl"
+      },
+      {
         "guid": "{6de382a6-4b05-43d8-918c-d51621d2927c}",
         "hidden": false,
         "name": "PWSH: thnetii.td.org.uit.no",
@@ -65,12 +71,6 @@
         "hidden": false,
         "name": "PowerShell (dotnet global)",
         "source": "Windows.Terminal.PowershellCore"
-      },
-      {
-        "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-        "hidden": false,
-        "name": "Ubuntu-20.04",
-        "source": "Windows.Terminal.Wsl"
       }
     ]
   },
