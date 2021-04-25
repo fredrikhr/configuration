@@ -10,6 +10,7 @@ As a workaround, a `WM_SETTINGCHANGE` broadcast message can be issued whenever a
 
 ``` cmd
 REG ADD HKLM\Software\Microsoft\Windows\CurrentVersion\Run /v "Update Registry" /t REG_SZ /d "rundll32.exe user32.dll,UpdatePerUserSystemParameters 1 True"
+REG ADD HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run /v "Update Registry" /t REG_SZ /d "rundll32.exe user32.dll,UpdatePerUserSystemParameters 1 True"
 ```
 
 ## Unprivileged Command Prompt
@@ -19,4 +20,5 @@ by executing the following commands instead:
 
 ``` cmd
 REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Update Registry" /t REG_SZ /d "rundll32.exe user32.dll,UpdatePerUserSystemParameters 1 True"
+REG ADD HKCU\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run /v "Update Registry" /t REG_SZ /d "rundll32.exe user32.dll,UpdatePerUserSystemParameters 1 True"
 ```
