@@ -26,7 +26,7 @@
     80,
     120
   ],
-  "terminal.integrated.shell.windows": "cmd.exe",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "python.defaultInterpreterPath": "python3",
   "python.formatting.provider": "autopep8",
   "python.linting.lintOnSave": true,
