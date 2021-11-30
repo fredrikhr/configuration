@@ -44,5 +44,6 @@
   "workbench.welcomePage.hiddenCategories": [
     "Setup",
     "Beginner"
-  ]
+  ],
+  "cmake.configureOnOpen": false
 }
