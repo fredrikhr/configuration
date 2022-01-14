@@ -45,5 +45,6 @@
     "Setup",
     "Beginner"
   ],
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "prettier.enable": false
 }
