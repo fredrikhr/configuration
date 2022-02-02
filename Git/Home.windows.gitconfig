@@ -1,3 +1,4 @@
 [include]
 	path = ~/AppData/Roaming/Configuration Repository/Git/git-all.windows.gitconfig
-
+[credential "https://dev.azure.com"]
+	useHttpPath = true
