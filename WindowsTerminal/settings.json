@@ -1,4 +1,5 @@
 {
+  "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
   // You can add more global application settings here.
@@ -20,14 +21,12 @@
         // Make changes here to the cmd.exe profile.
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "name": "Command Prompt",
-        "commandline": "cmd.exe",
         "hidden": false
       },
       {
         // Make changes here to the powershell.exe profile.
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "name": "Windows PowerShell",
-        "commandline": "powershell.exe",
         "hidden": false
       },
       {
@@ -59,6 +58,18 @@
         "hidden": true,
         "name": "Azure Cloud Shell",
         "source": "Windows.Terminal.Azure"
+      },
+      {
+        "guid": "{7a22b5da-c8f2-5f35-9b26-f33c7179f7e2}",
+        "hidden": false,
+        "name": "Developer Command Prompt for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{315c819c-22e7-5f71-9488-9f08844688ae}",
+        "hidden": false,
+        "name": "Developer PowerShell for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
       }
     ]
   },
@@ -314,7 +325,7 @@
     {
       "command": {
         "action": "splitPane",
-        "split": "horizontal",
+        "split": "down",
         "splitMode": "duplicate"
       },
       "keys": "ctrl+shift+numpad_divide"
@@ -322,7 +333,7 @@
     {
       "command": {
         "action": "splitPane",
-        "split": "vertical",
+        "split": "right",
         "splitMode": "duplicate"
       },
       "keys": "ctrl+alt+numpad_divide"
