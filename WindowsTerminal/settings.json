@@ -325,7 +325,7 @@
     {
       "command": {
         "action": "splitPane",
-        "split": "down",
+        "split": "horizontal",
         "splitMode": "duplicate"
       },
       "keys": "ctrl+shift+numpad_divide"
@@ -333,7 +333,7 @@
     {
       "command": {
         "action": "splitPane",
-        "split": "right",
+        "split": "vertical",
         "splitMode": "duplicate"
       },
       "keys": "ctrl+alt+numpad_divide"
