@@ -42,10 +42,11 @@
         "source": "Windows.Terminal.Wsl"
       },
       {
+        "commandline": "pwsh.exe -NoExit -Command \"$WinRMSession = New-PSSession -SshTransport thnetii.td.org.uit.no -UserName fredrik.h.rasch; Invoke-Command -Session $WinRMSession -ScriptBlock { $profile = Join-Path $ENV:USERPROFILE '.\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1'; . $profile }; Enter-PSSession $WinRMSession;\"",
         "guid": "{6de382a6-4b05-43d8-918c-d51621d2927c}",
         "hidden": false,
         "name": "PWSH: thnetii.td.org.uit.no",
-        "commandline": "pwsh.exe -NoExit -Command \"$WinRMSession = New-PSSession -UseSSL -Port 7741 thnetii.td.org.uit.no -Credential THNETII\\fredrik.h.rasch; Invoke-Command -Session $WinRMSession -ScriptBlock { $profile = Join-Path $ENV:USERPROFILE '.\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1'; . $profile }; Enter-PSSession $WinRMSession;\""
+        "icon": "ms-appx:///ProfileIcons/pwsh.png"
       },
       {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
