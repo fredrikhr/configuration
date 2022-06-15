@@ -46,5 +46,7 @@
     "Beginner"
   ],
   "cmake.configureOnOpen": false,
-  "prettier.enable": false
+  "eslint.enable": false,
+  "prettier.enable": false,
+  "jshint.enable": false
 }
