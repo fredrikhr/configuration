@@ -4,6 +4,14 @@
   "actions": [
     {
       "command": {
+        "action": "splitPane",
+        "split": "right",
+        "splitMode": "duplicate"
+      },
+      "keys": "ctrl+alt+numpad_divide"
+    },
+    {
+      "command": {
         "action": "copy",
         "singleLine": false
       },
@@ -18,18 +26,9 @@
     },
     {
       "command": {
-        "action": "splitPane",
-        "split": "right",
-        "splitMode": "duplicate"
+        "action": "newTab"
       },
-      "keys": "ctrl+alt+numpad_divide"
-    },
-    {
-      "command": {
-        "action": "moveFocus",
-        "direction": "up"
-      },
-      "keys": "ctrl+numpad8"
+      "keys": "ctrl+t"
     },
     {
       "command": "paste",
@@ -37,9 +36,10 @@
     },
     {
       "command": {
-        "action": "newTab"
+        "action": "moveFocus",
+        "direction": "up"
       },
-      "keys": "ctrl+t"
+      "keys": "ctrl+numpad8"
     },
     {
       "command": "find",
@@ -95,16 +95,16 @@
     {
       "command": {
         "action": "moveFocus",
-        "direction": "right"
+        "direction": "left"
       },
-      "keys": "ctrl+numpad6"
+      "keys": "ctrl+numpad4"
     },
     {
       "command": {
         "action": "moveFocus",
-        "direction": "left"
+        "direction": "right"
       },
-      "keys": "ctrl+numpad4"
+      "keys": "ctrl+numpad6"
     }
   ],
   "copyFormatting": "none",
@@ -140,8 +140,8 @@
         "commandline": "pwsh.exe -NoExit -Command \"$WinRMSession = New-PSSession -SshTransport thnetii.td.org.uit.no -UserName fredrik.h.rasch; Invoke-Command -Session $WinRMSession -ScriptBlock { $profile = Join-Path $ENV:USERPROFILE '.\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1'; . $profile }; Enter-PSSession $WinRMSession;\"",
         "guid": "{6de382a6-4b05-43d8-918c-d51621d2927c}",
         "hidden": false,
-        "name": "PWSH: thnetii.td.org.uit.no",
-        "icon": "ms-appx:///ProfileIcons/pwsh.png"
+        "icon": "ms-appx:///ProfileIcons/pwsh.png",
+        "name": "PWSH: thnetii.td.org.uit.no"
       },
       {
         "commandline": "cmd.exe /k \"FOR /F \"tokens=*\" %I IN ('\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe\" -latest -format value -property installationPath') DO @CALL \"%~dpnxI\\Common7\\Tools\\VsDevCmd.bat\"\"",
@@ -158,6 +158,18 @@
         "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
         "name": "Developer PowerShell for Visual Studio",
         "startingDirectory": "%USERPROFILE%"
+      },
+      {
+        "guid": "{b54ee527-ba80-5562-b0c7-49ab05efa928}",
+        "hidden": true,
+        "name": "Developer Command Prompt for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{43d1ece9-a022-5277-872a-7d933b20178a}",
+        "hidden": true,
+        "name": "Developer PowerShell for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
       }
     ]
   },
