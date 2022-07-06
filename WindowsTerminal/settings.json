@@ -160,13 +160,13 @@
         "startingDirectory": "%USERPROFILE%"
       },
       {
-        "guid": "{b54ee527-ba80-5562-b0c7-49ab05efa928}",
+        "guid": "{1055c2a3-4673-5687-8da1-83ae1dbb73fa}",
         "hidden": true,
         "name": "Developer Command Prompt for VS 2022",
         "source": "Windows.Terminal.VisualStudio"
       },
       {
-        "guid": "{43d1ece9-a022-5277-872a-7d933b20178a}",
+        "guid": "{d19df4b9-a3e5-5a8a-b64c-3a33f9fc27e3}",
         "hidden": true,
         "name": "Developer PowerShell for VS 2022",
         "source": "Windows.Terminal.VisualStudio"
