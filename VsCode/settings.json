@@ -1,26 +1,11 @@
 // Place your settings in this file to overwrite the default settings
 {
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  },
-  "[markdown]": {
-    "editor.wordWrap": "bounded",
-    "editor.wordWrapColumn": 80,
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    }
-  },
+  // Editor
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "off",
+
+  // File associations
   "files.associations": {
     "*.mak": "makefile",
     "*.resx": "xml",
@@ -28,32 +13,125 @@
     "*.props": "xml",
     "*.ruleset": "xml"
   },
-  "editor.wordWrap": "off",
-  "editor.rulers": [
-    80,
-    120
-  ],
+
+  // Explorer & Workbench
+  "explorer.openEditors.visible": 0,
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.welcomePage.hiddenCategories": ["Setup", "Beginner"],
+  "vsicons.dontShowNewVersionMessage": true,
+
+  // Integrated Terminal
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
+
+  // Git
+  "git.autofetch": true,
+
+  // Prettier
+  "prettier.enable": true,
+  "prettier.endOfLine": "auto",
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.useEditorConfig": true,
+  // ref.: https://github.com/prettier/prettier/blob/00ec91bfdee2e9bc592e4d1cf842507e50a86bbb/src/language-css/index.js
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ref.: https://github.com/prettier/prettier/blob/00ec91bfdee2e9bc592e4d1cf842507e50a86bbb/src/language-graphql/index.js
+  "[graphql]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ref.: https://github.com/prettier/prettier/blob/00ec91bfdee2e9bc592e4d1cf842507e50a86bbb/src/language-handlebars/index.js
+  "[handlebars]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ref.: https://github.com/prettier/prettier/blob/00ec91bfdee2e9bc592e4d1cf842507e50a86bbb/src/language-html/index.js
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ref.: https://github.com/prettier/prettier/blob/00ec91bfdee2e9bc592e4d1cf842507e50a86bbb/src/language-js/index.js
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[mongo]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json5]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ref.: https://github.com/prettier/prettier/blob/00ec91bfdee2e9bc592e4d1cf842507e50a86bbb/src/language-markdown/index.js
+  "[markdown]": {
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 80,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  "[mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // ref.: https://github.com/prettier/prettier/blob/00ec91bfdee2e9bc592e4d1cf842507e50a86bbb/src/language-yaml/index.js
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[ansible]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[home-assistant]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Javascript, Node.js, Typescript
+  "eslint.enable": false,
+  "jshint.enable": false,
+
+  // OmniSharp
+  "omnisharp.projectLoadTimeout": 3600,
+
+  // Python
   "python.defaultInterpreterPath": "python3",
   "python.formatting.provider": "autopep8",
   "python.linting.lintOnSave": true,
   "python.linting.pylintUseMinimalCheckers": false,
-  "editor.renderWhitespace": "all",
-  "omnisharp.projectLoadTimeout": 3600,
-  "explorer.openEditors.visible": 0,
-  "workbench.iconTheme": "vscode-icons",
-  "vsicons.dontShowNewVersionMessage": true,
-  "git.autofetch": true,
+
+  // RedHat XML, YAML
   "redhat.telemetry.enabled": true,
-  "workbench.welcomePage.hiddenCategories": [
-    "Setup",
-    "Beginner"
-  ],
-  "cmake.configureOnOpen": false,
-  "eslint.enable": false,
-  "prettier.enable": false,
-  "jshint.enable": false,
   "xml.server.binary.trustedHashes": [
     "34f51b1d8c3b85bf8af72502c3a52ca841d11cf76f848be198631e0dd2b7e169"
-  ]
+  ],
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+
+  // CMake
+  "cmake.configureOnOpen": false
 }
