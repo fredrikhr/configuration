@@ -1,7 +1,8 @@
 {
   "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema",
-  "actions": [
+    "actions":
+    [
     {
       "command": {
         "action": "splitPane",
@@ -28,7 +29,8 @@
       "keys": "ctrl+c"
     },
     {
-      "command": {
+            "command":
+            {
         "action": "copy",
         "singleLine": false
       },
@@ -111,9 +113,11 @@
   "copyOnSelect": false,
   "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
   "launchMode": "maximized",
-  "profiles": {
+    "profiles":
+    {
     "defaults": {},
-    "list": [
+        "list":
+        [
       {
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
@@ -179,7 +183,8 @@
       }
     ]
   },
-  "schemes": [
+    "schemes": 
+    [
     {
       "background": "#0C0C0C",
       "black": "#0C0C0C",
@@ -411,5 +416,6 @@
       "yellow": "#808000"
     }
   ],
+    "themes": [],
   "windowingBehavior": "useExisting"
 }
