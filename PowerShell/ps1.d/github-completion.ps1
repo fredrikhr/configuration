@@ -4,5 +4,6 @@ if (Test-Path $ghCompletionFilePath -NewerThan ([datetime]::Today.Subtract([time
 }
 
 if (Get-Command "gh" -ErrorAction SilentlyContinue) {
-    & ([scriptblock]::Create((& "gh" completion -s powershell | Tee-Object -FilePath $ghCompletionFilePath | Out-String)))
+    & gh completion -s powershell | Out-File -Force -LiteralPath $ghCompletionFilePath
+    . $ghCompletionFilePath
 }

@@ -4,5 +4,6 @@ if (Test-Path $shimFilePath -NewerThan ([datetime]::Today.Subtract([timespan]::F
 }
 
 if (Get-Command "dotnet-suggest" -ErrorAction SilentlyContinue) {
-    & ([scriptblock]::Create((& dotnet-suggest script PowerShell | Tee-Object -FilePath $shimFilePath | Out-String)))
+    & dotnet-suggest script PowerShell | Out-File -Force -LiteralPath $shimFilePath
+    . $shimFilePath
 }
