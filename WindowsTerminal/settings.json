@@ -125,6 +125,12 @@
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
     "launchMode": "maximized",
+    "newTabMenu":
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles":
     {
         "defaults": {},
@@ -428,6 +434,50 @@
             "yellow": "#808000"
         }
     ],
-    "themes": [],
+    "themes":
+    [
+        {
+            "name": "legacyDark",
+            "tab":
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window":
+            {
+                "applicationTheme": "dark",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacyLight",
+            "tab":
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window":
+            {
+                "applicationTheme": "light",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacySystem",
+            "tab":
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window":
+            {
+                "applicationTheme": "system",
+                "useMica": false
+            }
+        }
+    ],
     "windowingBehavior": "useExisting"
 }
