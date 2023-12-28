@@ -166,22 +166,6 @@
                 "name": "PWSH: thnetii.td.org.uit.no"
             },
             {
-                "commandline": "cmd.exe /k \"FOR /F \"tokens=*\" %I IN ('\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe\" -latest -format value -property installationPath') DO @CALL \"%~dpnxI\\Common7\\Tools\\VsDevCmd.bat\"\"",
-                "guid": "{5c1cb5c9-5649-4873-9be3-ba3467ea0cbb}",
-                "hidden": false,
-                "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
-                "name": "Developer Command Prompt for Visual Studio",
-                "startingDirectory": "%USERPROFILE%"
-            },
-            {
-                "commandline": "powershell -NoExit -Command \"& { $VsWhereLatestInstallationPath = & \"\"\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe\"\"\" -latest -format value -property installationPath; Import-Module \"\"\"${VsWhereLatestInstallationPath}\\Common7\\Tools\\Microsoft.VisualStudio.DevShell.dll\"\"\"; Enter-VsDevShell -VsInstallPath $VsWhereLatestInstallationPath; }\"",
-                "guid": "{d0095069-3b7a-4928-bb37-79a93ee631ce}",
-                "hidden": false,
-                "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
-                "name": "Developer PowerShell for Visual Studio",
-                "startingDirectory": "%USERPROFILE%"
-            },
-            {
                 "guid": "{530a0ab2-2940-5ead-ac10-58c4563e4221}",
                 "hidden": true,
                 "name": "Developer Command Prompt for VS 2022",
