@@ -159,13 +159,6 @@
               "source": "Windows.Terminal.Wsl"
             },
             {
-                "commandline": "pwsh.exe -NoExit -Command \"$WinRMSession = New-PSSession -SshTransport thnetii.td.org.uit.no -UserName fredrik.h.rasch; Invoke-Command -Session $WinRMSession -ScriptBlock { $profile = Join-Path $ENV:USERPROFILE '.\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1'; . $profile }; Enter-PSSession $WinRMSession;\"",
-                "guid": "{6de382a6-4b05-43d8-918c-d51621d2927c}",
-                "hidden": false,
-                "icon": "ms-appx:///ProfileIcons/pwsh.png",
-                "name": "PWSH: thnetii.td.org.uit.no"
-            },
-            {
                 "guid": "{530a0ab2-2940-5ead-ac10-58c4563e4221}",
                 "hidden": true,
                 "name": "Developer Command Prompt for VS 2022",
