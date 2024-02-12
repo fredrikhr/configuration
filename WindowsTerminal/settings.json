@@ -153,10 +153,10 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
-              "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-              "hidden": false,
-              "name": "Ubuntu",
-              "source": "Windows.Terminal.Wsl"
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{530a0ab2-2940-5ead-ac10-58c4563e4221}",
@@ -175,6 +175,12 @@
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
+                "hidden": true,
+                "name": "Visual Studio Debug Console",
+                "source": "VSDebugConsole"
             }
         ]
     },
