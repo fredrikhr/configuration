@@ -1,2 +1,5 @@
 [push]
 	default = tracking
+[alias]
+	# ref.: https://youtu.be/aolI_Rz0ZqY?si=RAdjHQ7dOHN4bREW&t=1063
+	pushf = push --force-with-lease
