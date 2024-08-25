@@ -119,9 +119,6 @@
 
   // Python
   "python.defaultInterpreterPath": "python3",
-  "python.formatting.provider": "autopep8",
-  "python.linting.lintOnSave": true,
-  "python.linting.pylintUseMinimalCheckers": false,
 
   // RedHat XML, YAML
   "redhat.telemetry.enabled": true,
