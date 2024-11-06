@@ -1,10 +1,18 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
-            "command":
+            "command": 
+            {
+                "action": "prevTab"
+            },
+            "id": "User.prevTab.0",
+            "keys": "ctrl+shift+tab"
+        },
+        {
+            "command": 
             {
                 "action": "splitPane",
                 "split": "right",
@@ -14,15 +22,16 @@
             "keys": "ctrl+alt+numpad_divide"
         },
         {
-            "command":
+            "command": 
             {
-                "action": "prevTab"
+                "action": "moveFocus",
+                "direction": "down"
             },
-            "id": "User.prevTab.0",
-            "keys": "ctrl+shift+tab"
+            "id": "User.moveFocus.F747588A",
+            "keys": "ctrl+numpad2"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "newTab"
             },
@@ -30,7 +39,7 @@
             "keys": "ctrl+t"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "copy",
                 "singleLine": false
@@ -39,7 +48,7 @@
             "keys": "ctrl+c"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "copy",
                 "singleLine": false
@@ -47,7 +56,12 @@
             "keys": "enter"
         },
         {
-            "command":
+            "command": "paste",
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "up"
@@ -56,12 +70,7 @@
             "keys": "ctrl+numpad8"
         },
         {
-            "command": "paste",
-            "id": "User.paste",
-            "keys": "ctrl+v"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "nextTab"
             },
@@ -69,7 +78,7 @@
             "keys": "ctrl+tab"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -88,7 +97,7 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -98,7 +107,7 @@
             "keys": "alt+shift+d"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -107,16 +116,7 @@
             "keys": "ctrl+numpad_divide"
         },
         {
-            "command":
-            {
-                "action": "moveFocus",
-                "direction": "down"
-            },
-            "id": "User.moveFocus.F747588A",
-            "keys": "ctrl+numpad2"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "down",
@@ -126,7 +126,7 @@
             "keys": "ctrl+shift+numpad_divide"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "left"
@@ -139,16 +139,16 @@
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
     "launchMode": "maximized",
-    "newTabMenu":
+    "newTabMenu": 
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles":
+    "profiles": 
     {
         "defaults": {},
-        "list":
+        "list": 
         [
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -183,22 +183,10 @@
                 "hidden": true,
                 "name": "Visual Studio Debug Console",
                 "source": "VSDebugConsole"
-            },
-            {
-                "guid": "{b8054b92-7192-5d31-9f36-7d4668d1cba6}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{0b2c1603-bc51-5637-b0ca-e66fb1f2c3df}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#300A24",
@@ -217,29 +205,6 @@
             "foreground": "#FFFFFF",
             "green": "#26A269",
             "name": "Ubuntu-22.04-ColorScheme",
-            "purple": "#881798",
-            "red": "#C21A23",
-            "selectionBackground": "#FFFFFF",
-            "white": "#CCCCCC",
-            "yellow": "#A2734C"
-        },
-        {
-            "background": "#300A24",
-            "black": "#171421",
-            "blue": "#0037DA",
-            "brightBlack": "#767676",
-            "brightBlue": "#08458F",
-            "brightCyan": "#2C9FB3",
-            "brightGreen": "#26A269",
-            "brightPurple": "#A347BA",
-            "brightRed": "#C01C28",
-            "brightWhite": "#F2F2F2",
-            "brightYellow": "#A2734C",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#3A96DD",
-            "foreground": "#FFFFFF",
-            "green": "#26A269",
-            "name": "Ubuntu-ColorScheme",
             "purple": "#881798",
             "red": "#C21A23",
             "selectionBackground": "#FFFFFF",
