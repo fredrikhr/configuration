@@ -1,7 +1,7 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
+    "actions":
     [
         {
             "command":
@@ -12,14 +12,14 @@
             "id": "User.moveFocus.2A0DA8E0"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "prevTab"
             },
             "id": "User.prevTab.0"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "right",
@@ -32,7 +32,7 @@
             "id": "User.find"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "down"
@@ -40,7 +40,7 @@
             "id": "User.moveFocus.F747588A"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "newTab"
             },
@@ -51,7 +51,7 @@
             "id": "User.paste"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -59,7 +59,7 @@
             "id": "User.moveFocus.87C324ED"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "up"
@@ -67,7 +67,7 @@
             "id": "User.moveFocus.6CD791B"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "down",
@@ -76,7 +76,7 @@
             "id": "User.splitPane.10B260D2"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "nextTab"
             },
@@ -90,7 +90,7 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-    "keybindings": 
+    "keybindings":
     [
         {
             "id": "User.moveFocus.6CD791B",
@@ -158,16 +158,16 @@
         }
     ],
     "launchMode": "maximized",
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
         "defaults": {},
-        "list": 
+        "list":
         [
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -202,10 +202,18 @@
                 "hidden": true,
                 "name": "Visual Studio Debug Console",
                 "source": "VSDebugConsole"
+            },
+            {
+                "commandline": "%ComSpec% /K \"FOR /F \"tokens=*\" %V IN ('\"%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer\\vswhere.exe\" -latest -property installationPath') DO @CALL \"%~V\\Common7\\Tools\\VsDevCmd.bat\"\"",
+                "guid": "{8ca519f9-1ab6-4bb9-aab4-f3660f45ac93}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/vs-cmd.png",
+                "name": "Developer Command Prompt for VS",
+                "startingDirectory": "%USERPROFILE%"
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#300A24",
