@@ -4,12 +4,19 @@
     "actions": 
     [
         {
+            "command":
+            {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "id": "User.moveFocus.2A0DA8E0"
+        },
+        {
             "command": 
             {
                 "action": "prevTab"
             },
-            "id": "User.prevTab.0",
-            "keys": "ctrl+shift+tab"
+            "id": "User.prevTab.0"
         },
         {
             "command": 
@@ -18,8 +25,11 @@
                 "split": "right",
                 "splitMode": "duplicate"
             },
-            "id": "User.splitPane.FEF0D40B",
-            "keys": "ctrl+alt+numpad_divide"
+            "id": "User.splitPane.FEF0D40B"
+        },
+        {
+            "command": "find",
+            "id": "User.find"
         },
         {
             "command": 
@@ -27,55 +37,18 @@
                 "action": "moveFocus",
                 "direction": "down"
             },
-            "id": "User.moveFocus.F747588A",
-            "keys": "ctrl+numpad2"
+            "id": "User.moveFocus.F747588A"
         },
         {
             "command": 
             {
                 "action": "newTab"
             },
-            "id": "User.newTab.5DEADB41",
-            "keys": "ctrl+t"
-        },
-        {
-            "command": 
-            {
-                "action": "copy",
-                "singleLine": false
-            },
-            "id": "User.copy.644BA8F2",
-            "keys": "ctrl+c"
-        },
-        {
-            "command": 
-            {
-                "action": "copy",
-                "singleLine": false
-            },
-            "keys": "enter"
+            "id": "User.newTab.5DEADB41"
         },
         {
             "command": "paste",
-            "id": "User.paste",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "up"
-            },
-            "id": "User.moveFocus.6CD791B",
-            "keys": "ctrl+numpad8"
-        },
-        {
-            "command": 
-            {
-                "action": "nextTab"
-            },
-            "id": "User.nextTab.0",
-            "keys": "ctrl+tab"
+            "id": "User.paste"
         },
         {
             "command": 
@@ -83,37 +56,15 @@
                 "action": "moveFocus",
                 "direction": "right"
             },
-            "id": "User.moveFocus.87C324ED",
-            "keys": "ctrl+numpad6"
-        },
-        {
-            "command": "closePane",
-            "id": "User.closePane",
-            "keys": "ctrl+f4"
-        },
-        {
-            "command": "find",
-            "id": "User.find",
-            "keys": "ctrl+shift+f"
+            "id": "User.moveFocus.87C324ED"
         },
         {
             "command": 
             {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
+                "action": "moveFocus",
+                "direction": "up"
             },
-            "id": "User.splitPane.A6751878",
-            "keys": "alt+shift+d"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
-            },
-            "keys": "ctrl+numpad_divide"
+            "id": "User.moveFocus.6CD791B"
         },
         {
             "command": 
@@ -122,22 +73,90 @@
                 "split": "down",
                 "splitMode": "duplicate"
             },
-            "id": "User.splitPane.10B260D2",
-            "keys": "ctrl+shift+numpad_divide"
+            "id": "User.splitPane.10B260D2"
         },
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "left"
+                "action": "nextTab"
             },
-            "id": "User.moveFocus.2A0DA8E0",
-            "keys": "ctrl+numpad4"
+            "id": "User.nextTab.0"
+        },
+        {
+            "command": "closePane",
+            "id": "User.closePane"
         }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+    "keybindings": 
+    [
+        {
+            "id": "User.moveFocus.6CD791B",
+            "keys": "ctrl+numpad8"
+        },
+        {
+            "id": "User.prevTab.0",
+            "keys": "ctrl+shift+tab"
+        },
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "User.newTab.5DEADB41",
+            "keys": "ctrl+t"
+        },
+        {
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": "User.splitPane.FEF0D40B",
+            "keys": "ctrl+alt+numpad_divide"
+        },
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "enter"
+        },
+        {
+            "id": "User.moveFocus.F747588A",
+            "keys": "ctrl+numpad2"
+        },
+        {
+            "id": "User.nextTab.0",
+            "keys": "ctrl+tab"
+        },
+        {
+            "id": "User.moveFocus.87C324ED",
+            "keys": "ctrl+numpad6"
+        },
+        {
+            "id": "User.closePane",
+            "keys": "ctrl+f4"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "ctrl+numpad_divide"
+        },
+        {
+            "id": "User.splitPane.10B260D2",
+            "keys": "ctrl+shift+numpad_divide"
+        },
+        {
+            "id": "User.moveFocus.2A0DA8E0",
+            "keys": "ctrl+numpad4"
+        }
+    ],
     "launchMode": "maximized",
     "newTabMenu": 
     [
