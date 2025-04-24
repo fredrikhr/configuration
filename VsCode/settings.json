@@ -11,7 +11,8 @@
     "*.resx": "xml",
     "*.*proj": "xml",
     "*.props": "xml",
-    "*.ruleset": "xml"
+    "*.ruleset": "xml",
+    "*.slnx": "xml"
   },
 
   // Explorer & Workbench
@@ -128,6 +129,12 @@
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
+  "xml.fileAssociations": [
+    {
+      "pattern": "**.slnx",
+      "systemId": "https://github.com/microsoft/vs-solutionpersistence/raw/refs/heads/main/src/Microsoft.VisualStudio.SolutionPersistence/Serializer/Xml/Slnx.xsd"
+    }
+  ],
 
   // CMake
   "cmake.configureOnOpen": false,
@@ -135,5 +142,5 @@
   "cmake.pinnedCommands": [
     "workbench.action.tasks.configureTaskRunner",
     "workbench.action.tasks.runTask"
-  ]
+  ],
 }
