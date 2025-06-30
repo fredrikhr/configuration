@@ -132,7 +132,7 @@
   },
   "xml.fileAssociations": [
     {
-      "pattern": "**.slnx",
+      "pattern": "**/*.slnx",
       "systemId": "https://github.com/microsoft/vs-solutionpersistence/raw/refs/heads/main/src/Microsoft.VisualStudio.SolutionPersistence/Serializer/Xml/Slnx.xsd"
     }
   ],
