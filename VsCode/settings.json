@@ -17,7 +17,7 @@
   },
 
   // Explorer & Workbench
-  "explorer.openEditors.visible": 0,
+  "workbench.editor.empty.hint": "hidden",
   "workbench.iconTheme": "vscode-icons",
   "workbench.welcomePage.hiddenCategories": ["Setup", "Beginner"],
   "vsicons.dontShowNewVersionMessage": true,
