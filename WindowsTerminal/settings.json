@@ -192,6 +192,12 @@
                 "source": "Microsoft.WSL"
             },
             {
+                "guid": "{37fe7c78-5604-5d1b-84fc-53b018479904}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Microsoft.WSL"
+            },
+            {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": true,
                 "name": "Azure Cloud Shell",
@@ -210,6 +216,12 @@
                 "icon": "ms-appx:///ProfileIcons/vs-cmd.png",
                 "name": "Developer Command Prompt for VS",
                 "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": true,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
