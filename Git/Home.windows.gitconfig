@@ -1,4 +1,8 @@
 [include]
 	path = ~/AppData/Roaming/Configuration Repository/Git/git-all.windows.gitconfig
+[credential "https://github.com"]
+    helper = !\"C:\\Program Files\\GitHub CLI\\gh.exe\" auth git-credential
+[credential "https://gist.github.com"]
+    helper = !\"C:\\Program Files\\GitHub CLI\\gh.exe\" auth git-credential
 [credential "https://dev.azure.com"]
 	useHttpPath = true
