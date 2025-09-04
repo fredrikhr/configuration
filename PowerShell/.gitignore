@@ -1,5 +1,5 @@
 Modules
 Scripts
-ps1.d/dotnet-completion-script.ps1
+ps1.d/dotnet-suggest-completion-script.ps1
 ps1.d/github-completion-script.ps1
 Microsoft.PowerShell_profile.ps1

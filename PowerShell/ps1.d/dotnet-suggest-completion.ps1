@@ -1,4 +1,4 @@
-$shimFilePath = Join-Path $PSScriptRoot "dotnet-completion-script.ps1"
+$shimFilePath = Join-Path $PSScriptRoot "dotnet-suggest-completion-script.ps1"
 if (Test-Path $shimFilePath -NewerThan ([datetime]::Today.Subtract([timespan]::FromDays(7)))) {
     return
 }
