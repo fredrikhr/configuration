@@ -6,7 +6,7 @@ Configuration for Git Version Control.
 
 | OS | Command-line |
 | - | - |
-| Windows | `COPY "%APPDATA%\Configuration Repository\Git\Home.windows.gitconfig" "%USERPROFILE%\.gitconfig"` |
+| Windows | `MKLINK "%USERPROFILE%\.gitconfig" "%APPDATA%\Configuration Repository\Git\Home.windows.gitconfig"` |
 | UNIX | `ln -sfv ~/.config/repository/Git/Home.unix.gitconfig ~/.gitconfig`
 
 ### User configuration commands

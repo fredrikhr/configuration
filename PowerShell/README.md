@@ -11,7 +11,7 @@ For PowerShell Core this file is `~/.config/powershell/Microsoft.PowerShell_prof
 ``` bat
 MKLINK /J "%USERPROFILE%\Documents\WindowsPowerShell" "%APPDATA%\Configuration Repository\PowerShell"
 MKLINK /J "%USERPROFILE%\Documents\PowerShell" "%APPDATA%\Configuration Repository\PowerShell"
-COPY /Y "%APPDATA%\Configuration Repository\PowerShell\profile.ps1" "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+REM MKLINK "%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" "%APPDATA%\Configuration Repository\PowerShell\profile.ps1" 
 ```
 
 ## Linux
