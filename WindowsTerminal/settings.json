@@ -6,17 +6,17 @@
         {
             "command":
             {
-                "action": "prevTab"
-            },
-            "id": "User.prevTab.0"
-        },
-        {
-            "command":
-            {
                 "action": "moveFocus",
                 "direction": "left"
             },
             "id": "User.moveFocus.2A0DA8E0"
+        },
+        {
+            "command":
+            {
+                "action": "prevTab"
+            },
+            "id": "User.prevTab.0"
         },
         {
             "command":
@@ -28,16 +28,16 @@
             "id": "User.splitPane.FEF0D40B"
         },
         {
+            "command": "find",
+            "id": "User.find"
+        },
+        {
             "command":
             {
                 "action": "moveFocus",
                 "direction": "down"
             },
             "id": "User.moveFocus.F747588A"
-        },
-        {
-            "command": "find",
-            "id": "User.find"
         },
         {
             "command":
@@ -48,23 +48,15 @@
             "id": "User.moveFocus.87C324ED"
         },
         {
-            "command":
-            {
-                "action": "newTab"
-            },
-            "id": "User.newTab.5DEADB41"
-        },
-        {
             "command": "paste",
             "id": "User.paste"
         },
         {
             "command":
             {
-                "action": "moveFocus",
-                "direction": "up"
+                "action": "newTab"
             },
-            "id": "User.moveFocus.6CD791B"
+            "id": "User.newTab.5DEADB41"
         },
         {
             "command":
@@ -74,6 +66,14 @@
                 "splitMode": "duplicate"
             },
             "id": "User.splitPane.10B260D2"
+        },
+        {
+            "command":
+            {
+                "action": "moveFocus",
+                "direction": "up"
+            },
+            "id": "User.moveFocus.6CD791B"
         },
         {
             "command":
@@ -97,32 +97,32 @@
             "keys": "ctrl+t"
         },
         {
-            "id": "User.prevTab.0",
-            "keys": "ctrl+shift+tab"
-        },
-        {
             "id": "Terminal.CopyToClipboard",
             "keys": "ctrl+c"
+        },
+        {
+            "id": "User.prevTab.0",
+            "keys": "ctrl+shift+tab"
         },
         {
             "id": "User.moveFocus.6CD791B",
             "keys": "ctrl+numpad8"
         },
         {
-            "id": "User.splitPane.FEF0D40B",
-            "keys": "ctrl+alt+numpad_divide"
-        },
-        {
             "id": "Terminal.CopyToClipboard",
             "keys": "enter"
         },
         {
-            "id": "User.find",
-            "keys": "ctrl+shift+f"
+            "id": "User.splitPane.FEF0D40B",
+            "keys": "ctrl+alt+numpad_divide"
         },
         {
             "id": "User.paste",
             "keys": "ctrl+v"
+        },
+        {
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
         },
         {
             "id": "User.moveFocus.F747588A",
@@ -186,16 +186,10 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
-                "guid": "{91ffbc59-899f-59ab-99d1-1f55f8c799c0}",
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "source": "Microsoft.WSL"
-            },
-            {
-                "guid": "{37fe7c78-5604-5d1b-84fc-53b018479904}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "source": "Microsoft.WSL"
+                "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -216,15 +210,10 @@
                 "icon": "ms-appx:///ProfileIcons/vs-cmd.png",
                 "name": "Developer Command Prompt for VS",
                 "startingDirectory": "%USERPROFILE%"
-            },
-            {
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": true,
-                "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
+    "disabledProfileSources": ["Git", "Microsoft.WSL", "Windows.Terminal.VisualStudio"],
     "schemes":
     [
         {
