@@ -6,17 +6,17 @@
         {
             "command":
             {
-                "action": "moveFocus",
-                "direction": "left"
+                "action": "prevTab"
             },
-            "id": "User.moveFocus.2A0DA8E0"
+            "id": "User.prevTab.0"
         },
         {
             "command":
             {
-                "action": "prevTab"
+                "action": "moveFocus",
+                "direction": "left"
             },
-            "id": "User.prevTab.0"
+            "id": "User.moveFocus.2A0DA8E0"
         },
         {
             "command":
@@ -28,10 +28,6 @@
             "id": "User.splitPane.FEF0D40B"
         },
         {
-            "command": "find",
-            "id": "User.find"
-        },
-        {
             "command":
             {
                 "action": "moveFocus",
@@ -40,12 +36,8 @@
             "id": "User.moveFocus.F747588A"
         },
         {
-            "command":
-            {
-                "action": "moveFocus",
-                "direction": "right"
-            },
-            "id": "User.moveFocus.87C324ED"
+            "command": "find",
+            "id": "User.find"
         },
         {
             "command": "paste",
@@ -57,6 +49,14 @@
                 "action": "newTab"
             },
             "id": "User.newTab.5DEADB41"
+        },
+        {
+            "command":
+            {
+                "action": "moveFocus",
+                "direction": "right"
+            },
+            "id": "User.moveFocus.87C324ED"
         },
         {
             "command":
@@ -90,11 +90,16 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+    "disabledProfileSources":
+    [
+        "Git",
+        "Windows.Terminal.VisualStudio"
+    ],
     "keybindings":
     [
         {
-            "id": "User.newTab.5DEADB41",
-            "keys": "ctrl+t"
+            "id": "User.moveFocus.6CD791B",
+            "keys": "ctrl+numpad8"
         },
         {
             "id": "Terminal.CopyToClipboard",
@@ -105,16 +110,8 @@
             "keys": "ctrl+shift+tab"
         },
         {
-            "id": "User.moveFocus.6CD791B",
-            "keys": "ctrl+numpad8"
-        },
-        {
-            "id": "Terminal.CopyToClipboard",
-            "keys": "enter"
-        },
-        {
-            "id": "User.splitPane.FEF0D40B",
-            "keys": "ctrl+alt+numpad_divide"
+            "id": "User.newTab.5DEADB41",
+            "keys": "ctrl+t"
         },
         {
             "id": "User.paste",
@@ -123,6 +120,14 @@
         {
             "id": "User.find",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "enter"
+        },
+        {
+            "id": "User.splitPane.FEF0D40B",
+            "keys": "ctrl+alt+numpad_divide"
         },
         {
             "id": "User.moveFocus.F747588A",
@@ -186,10 +191,10 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "guid": "{37fe7c78-5604-5d1b-84fc-53b018479904}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Microsoft.WSL"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -213,7 +218,6 @@
             }
         ]
     },
-    "disabledProfileSources": ["Git", "Microsoft.WSL", "Windows.Terminal.VisualStudio"],
     "schemes":
     [
         {
