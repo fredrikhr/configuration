@@ -1,7 +1,7 @@
 [include]
 	path = ~/.config/repository/Git/git-all.common.gitconfig
 [credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager-core.exe
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
 [credential "https://github.com"]
     helper = !/mnt/c/Program\\ Files/GitHub\\ CLI/gh.exe auth git-credential
 [credential "https://gist.github.com"]
