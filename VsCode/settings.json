@@ -120,7 +120,20 @@
   "omnisharp.projectLoadTimeout": 3600,
 
   // Python
-  "python.defaultInterpreterPath": "python3",
+  "jupyter.interactiveWindow.creationMode": "perFile",
+
+  // JSON
+  "json.schemaDownload.trustedDomains": {
+    "https://aka.ms/terminal-profiles-schema": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schema.management.azure.com/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://www.schemastore.org/": true
+  },
 
   // RedHat XML, YAML
   "redhat.telemetry.enabled": true,
@@ -136,6 +149,20 @@
       "systemId": "https://github.com/microsoft/vs-solutionpersistence/raw/refs/heads/main/src/Microsoft.VisualStudio.SolutionPersistence/Serializer/Xml/Slnx.xsd"
     }
   ],
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
 
   // CMake
   "cmake.configureOnOpen": false,
@@ -144,6 +171,17 @@
     "workbench.action.tasks.configureTaskRunner",
     "workbench.action.tasks.runTask"
   ],
-  "workbench.secondarySideBar.defaultVisibility": "hidden",
+
+  // Diff Editor
   "diffEditor.maxComputationTime": 0,
+
+  // Copilot
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "chat.disableAIFeatures": true
 }
