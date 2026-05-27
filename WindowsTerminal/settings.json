@@ -40,18 +40,7 @@
             "id": "User.find"
         },
         {
-            "command": "paste",
-            "id": "User.paste"
-        },
-        {
-            "command":
-            {
-                "action": "newTab"
-            },
-            "id": "User.newTab.5DEADB41"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -61,11 +50,13 @@
         {
             "command":
             {
-                "action": "splitPane",
-                "split": "down",
-                "splitMode": "duplicate"
+                "action": "newTab"
             },
-            "id": "User.splitPane.10B260D2"
+            "id": "User.newTab.5DEADB41"
+        },
+        {
+            "command": "paste",
+            "id": "User.paste"
         },
         {
             "command":
@@ -74,6 +65,15 @@
                 "direction": "up"
             },
             "id": "User.moveFocus.6CD791B"
+        },
+        {
+            "command":
+            {
+                "action": "splitPane",
+                "split": "down",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.10B260D2"
         },
         {
             "command":
@@ -98,36 +98,36 @@
     "keybindings":
     [
         {
-            "id": "User.moveFocus.6CD791B",
-            "keys": "ctrl+numpad8"
-        },
-        {
-            "id": "Terminal.CopyToClipboard",
-            "keys": "ctrl+c"
+            "id": "User.newTab.5DEADB41",
+            "keys": "ctrl+t"
         },
         {
             "id": "User.prevTab.0",
             "keys": "ctrl+shift+tab"
         },
         {
-            "id": "User.newTab.5DEADB41",
-            "keys": "ctrl+t"
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
         },
         {
-            "id": "User.paste",
-            "keys": "ctrl+v"
+            "id": "User.moveFocus.6CD791B",
+            "keys": "ctrl+numpad8"
         },
         {
-            "id": "User.find",
-            "keys": "ctrl+shift+f"
+            "id": "User.splitPane.FEF0D40B",
+            "keys": "ctrl+alt+numpad_divide"
         },
         {
             "id": "Terminal.CopyToClipboard",
             "keys": "enter"
         },
         {
-            "id": "User.splitPane.FEF0D40B",
-            "keys": "ctrl+alt+numpad_divide"
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.paste",
+            "keys": "ctrl+v"
         },
         {
             "id": "User.moveFocus.F747588A",
