@@ -119,9 +119,6 @@
   // OmniSharp
   "omnisharp.projectLoadTimeout": 3600,
 
-  // Python
-  "jupyter.interactiveWindow.creationMode": "perFile",
-
   // JSON
   "json.schemaDownload.trustedDomains": {
     "https://aka.ms/terminal-profiles-schema": true,
@@ -134,6 +131,10 @@
     "https://schemastore.azurewebsites.net/": true,
     "https://www.schemastore.org/": true
   },
+
+  // Python
+  "python.useEnvironmentsExtension": true,
+  "jupyter.interactiveWindow.creationMode": "perFile",
 
   // RedHat XML, YAML
   "redhat.telemetry.enabled": true,
