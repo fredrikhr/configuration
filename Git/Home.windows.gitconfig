@@ -1,6 +1,7 @@
 [include]
 	path = ~/AppData/Roaming/Configuration Repository/Git/git-all.windows.gitconfig
 [core]
+	editor = \"C:\\Windows\\System32\\edit.exe\"
 	longpaths = true
 [credential]
 	helper = !~/AppData/Local/Programs/Git\\ Credential\\ Manager/git-credential-manager.exe
