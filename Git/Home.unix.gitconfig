@@ -1,7 +1,7 @@
 [include]
 	path = ~/.config/repository/Git/git-all.common.gitconfig
 [credential]
-	helper = !/usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+	helper = manager
 	azreposCredentialType = oauth
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
