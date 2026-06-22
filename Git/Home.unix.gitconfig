@@ -2,6 +2,7 @@
 	path = ~/.config/repository/Git/git-all.common.gitconfig
 [credential]
 	helper = manager
+	credentialStore = secretservice
 	azreposCredentialType = oauth
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
