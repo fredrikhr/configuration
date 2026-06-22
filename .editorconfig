@@ -12,3 +12,8 @@ indent_size = 2
 
 [*.{md,markdown}]
 trim_trailing_whitespace = false
+
+[*.gitconfig]
+end_of_line = lf
+indent_size = 4
+indent_style = tab
