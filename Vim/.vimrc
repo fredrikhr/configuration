@@ -141,7 +141,7 @@ augroup omnisharp_commands
     autocmd!
 
     " Show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+    autocmd CursorHold *.cs call OmniSharpTypeLookup()
 
     " The following commands are contextual, based on the cursor position.
     autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
