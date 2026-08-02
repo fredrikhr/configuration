@@ -40,8 +40,12 @@
             "id": "User.find"
         },
         {
-            "command": "paste",
-            "id": "User.paste"
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "right"
+            },
+            "id": "User.moveFocus.87C324ED"
         },
         {
             "command": 
@@ -51,12 +55,16 @@
             "id": "User.newTab.5DEADB41"
         },
         {
+            "command": "paste",
+            "id": "User.paste"
+        },
+        {
             "command": 
             {
                 "action": "moveFocus",
-                "direction": "right"
+                "direction": "up"
             },
-            "id": "User.moveFocus.87C324ED"
+            "id": "User.moveFocus.6CD791B"
         },
         {
             "command": 
@@ -70,14 +78,6 @@
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "up"
-            },
-            "id": "User.moveFocus.6CD791B"
-        },
-        {
-            "command": 
-            {
                 "action": "nextTab"
             },
             "id": "User.nextTab.0"
@@ -85,6 +85,13 @@
         {
             "command": "closePane",
             "id": "User.closePane"
+        },
+        {
+            "command": {
+                "action": "sendInput",
+                "input": "\u001b\r"
+            },
+            "keys": "shift+enter"
         }
     ],
     "copyFormatting": "none",
@@ -98,36 +105,36 @@
     "keybindings": 
     [
         {
-            "id": "User.moveFocus.6CD791B",
-            "keys": "ctrl+numpad8"
-        },
-        {
-            "id": "Terminal.CopyToClipboard",
-            "keys": "ctrl+c"
+            "id": "User.newTab.5DEADB41",
+            "keys": "ctrl+t"
         },
         {
             "id": "User.prevTab.0",
             "keys": "ctrl+shift+tab"
         },
         {
-            "id": "User.newTab.5DEADB41",
-            "keys": "ctrl+t"
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
         },
         {
-            "id": "User.paste",
-            "keys": "ctrl+v"
+            "id": "User.moveFocus.6CD791B",
+            "keys": "ctrl+numpad8"
         },
         {
-            "id": "User.find",
-            "keys": "ctrl+shift+f"
+            "id": "User.splitPane.FEF0D40B",
+            "keys": "ctrl+alt+numpad_divide"
         },
         {
             "id": "Terminal.CopyToClipboard",
             "keys": "enter"
         },
         {
-            "id": "User.splitPane.FEF0D40B",
-            "keys": "ctrl+alt+numpad_divide"
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.paste",
+            "keys": "ctrl+v"
         },
         {
             "id": "User.moveFocus.F747588A",
@@ -202,12 +209,6 @@
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
-                "hidden": true,
-                "name": "Visual Studio Debug Console",
-                "source": "VSDebugConsole"
             },
             {
                 "commandline": "%ComSpec% /K \"FOR /F \"tokens=*\" %V IN ('\"%ProgramFiles(x86)%\\Microsoft Visual Studio\\Installer\\vswhere.exe\" -latest -property installationPath') DO @CALL \"%~V\\Common7\\Tools\\VsDevCmd.bat\"\"",
