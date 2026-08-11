@@ -129,7 +129,8 @@
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://schema.management.azure.com/": true,
     "https://schemastore.azurewebsites.net/": true,
-    "https://www.schemastore.org/": true
+    "https://www.schemastore.org/": true,
+    "https://xunit.net": true
   },
 
   // Python
